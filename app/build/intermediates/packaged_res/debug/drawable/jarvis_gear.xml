@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Anillo Central -->
+    <path
+        android:strokeColor="@color/cyberpunk_red"
+        android:strokeWidth="1"
+        android:pathData="M50,50m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0" />
+
+    <!-- Dientes del Engranaje (Simétricos) -->
+    <group android:name="gear_teeth">
+        <path
+            android:fillColor="@color/cyberpunk_red"
+            android:pathData="M48,5 L52,5 L53,15 L47,15 Z" />
+        <path
+            android:fillColor="@color/cyberpunk_red"
+            android:pathData="M48,85 L52,85 L53,95 L47,95 Z" />
+        <path
+            android:fillColor="@color/cyberpunk_red"
+            android:pathData="M5,48 L5,52 L15,53 L15,47 Z" />
+        <path
+            android:fillColor="@color/cyberpunk_red"
+            android:pathData="M85,48 L85,52 L95,53 L95,47 Z" />
+        
+        <!-- Diagonales -->
+        <path
+            android:fillColor="@color/cyberpunk_red"
+            android:pathData="M18,18 L22,22 L27,15 L23,11 Z" />
+        <path
+            android:fillColor="@color/cyberpunk_red"
+            android:pathData="M78,78 L82,82 L89,75 L85,71 Z" />
+        <path
+            android:fillColor="@color/cyberpunk_red"
+            android:pathData="M18,82 L22,78 L27,85 L23,89 Z" />
+        <path
+            android:fillColor="@color/cyberpunk_red"
+            android:pathData="M78,22 L82,18 L89,25 L85,29 Z" />
+    </group>
+</vector>

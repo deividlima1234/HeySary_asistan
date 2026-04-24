@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/overlay_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/overlay_dim">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Avatar y Engranajes (Animados) -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/avatar_stack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp">
+
+            <!-- Engranaje Exterior -->
+            <ImageView
+                android:id="@+id/outer_gear"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:src="@drawable/jarvis_gear"
+                android:alpha="0.4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Engranaje Interior -->
+            <ImageView
+                android:id="@+id/inner_gear"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/jarvis_gear"
+                android:alpha="0.3"
+                android:rotation="45"
+                app:layout_constraintBottom_toBottomOf="@+id/outer_gear"
+                app:layout_constraintEnd_toEndOf="@+id/outer_gear"
+                app:layout_constraintStart_toStartOf="@+id/outer_gear"
+                app:layout_constraintTop_toTopOf="@+id/outer_gear" />
+
+            <!-- Resplandor Reactivo (Ondas) -->
+            <View
+                android:id="@+id/core_glow"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/avatar_glow_bg"
+                android:alpha="0.6"
+                app:layout_constraintBottom_toBottomOf="@+id/outer_gear"
+                app:layout_constraintEnd_toEndOf="@+id/outer_gear"
+                app:layout_constraintStart_toStartOf="@+id/outer_gear"
+                app:layout_constraintTop_toTopOf="@+id/outer_gear" />
+
+            <!-- Núcleo Jarvis -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/jarvis_core"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="3dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dashboard_avatar"
+                android:background="@drawable/avatar_glow_bg"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/cyberpunk_red"
+                app:shapeAppearanceOverlay="@style/CircleImage"
+                app:layout_constraintBottom_toBottomOf="@+id/outer_gear"
+                app:layout_constraintEnd_toEndOf="@+id/outer_gear"
+                app:layout_constraintStart_toStartOf="@+id/outer_gear"
+                app:layout_constraintTop_toTopOf="@+id/outer_gear" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Caja de Respuesta Expandible (Pro) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/response_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#1A1A1A"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:text="Sary Intelligence"
+                        android:textColor="@color/cyberpunk_red"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/close_response"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="6dp"
+                        android:src="@android:drawable/ic_menu_close_clear_cancel"
+                        app:tint="@color/white" />
+                </RelativeLayout>
+
+                <!-- Línea Neón Roja Decorativa -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/cyberpunk_red" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/response_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="4dp"
+                            android:text="Respuesta de la IA..."
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+
+                        <FrameLayout
+                            android:id="@+id/dynamic_content_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp" />
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Píldora de Entrada (Principal) -->
+        <LinearLayout
+            android:id="@+id/pill_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pill_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/assistant_logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:src="@android:drawable/ic_menu_info_details"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/status_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="Sary a la orden..."
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <com.eddam.heysary.VoiceWaveView
+                android:id="@+id/voice_wave"
+                android:layout_width="60dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mic_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/pill_background"
+                android:backgroundTint="@color/cyberpunk_red"
+                android:padding="12dp"
+                android:src="@android:drawable/ic_btn_speak_now"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

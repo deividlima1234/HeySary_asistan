@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/pill_background"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="8dp">
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@android:drawable/ic_menu_search"
+        android:tint="@color/white" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:text="Pregúntale a Sary..."
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:alpha="0.7" />
+
+    <ImageView
+        android:id="@+id/widget_mic_button"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/pill_background"
+        android:backgroundTint="@color/cyberpunk_red"
+        android:padding="10dp"
+        android:src="@android:drawable/ic_btn_speak_now"
+        android:tint="@color/white" />
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#222222"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:strokeColor="@color/cyberpunk_red"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <!-- Foto del Contacto -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="0dp">
+            
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/contact_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/ic_menu_report_image" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del Contacto"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/contact_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="+51 987 654 321"
+                android:textColor="@color/cyberpunk_red"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Botón de Llamada Rápida -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/call_action_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/pill_background"
+            android:backgroundTint="@color/cyberpunk_red"
+            android:padding="10dp"
+            android:src="@android:drawable/stat_sys_phone_call"
+            app:tint="@color/white" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
