@@ -70,5 +70,9 @@
     {
         "merged": "com.eddam.heysary.app-merged_res-35:/layout_item_app_whitelist.xml.flat",
         "source": "com.eddam.heysary.app-main-37:/layout/item_app_whitelist.xml"
+    },
+    {
+        "merged": "com.eddam.heysary.app-merged_res-35:/drawable_hud_card_bg.xml.flat",
+        "source": "com.eddam.heysary.app-main-37:/drawable/hud_card_bg.xml"
     }
 ]

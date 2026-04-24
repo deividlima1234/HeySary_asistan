@@ -20,7 +20,12 @@ import android.speech.tts.UtteranceProgressListener
 import android.net.Uri
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.EditText
 import android.widget.TextView
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.text.TextWatcher
+import android.text.Editable
 import java.util.Locale
 import kotlinx.coroutines.*
 import android.view.ContextThemeWrapper
@@ -30,7 +35,7 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
 
     private lateinit var windowManager: WindowManager
     private lateinit var overlayView: View
-    private lateinit var statusText: TextView
+    private lateinit var statusText: EditText
     private lateinit var voiceWave: VoiceWaveView
     private lateinit var responseCard: View
     private lateinit var responseText: TextView
@@ -58,44 +63,20 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
     private val messages = listOf(
         "Pídeselo a Sary...",
         "Sary a la orden...",
-        "¿En qué te ayudo?",
-        "Hey Sary está lista",
-        "Dime lo que quieras..."
+        "¿En qué puedo ayudarte?",
+        "Status: Online",
+        "Listening..."
     )
-    private var currentMessageIndex = 0
+
     private var isListening = false
     private var isThinking = false
-    private var isRunningProtocol = false
 
-    private val gearRunnable = object : Runnable {
+    private val statusUpdateRunnable = object : Runnable {
         override fun run() {
-            if (::outerGear.isInitialized) {
-                val speed = if (isThinking) 4f else 1f
-                outerGear.rotation += speed
-                innerGear.rotation -= speed * 1.5f
-                
-                // Si está pensando, añadimos una pequeña vibración aleatoria
-                if (isThinking) {
-                    outerGear.translationX = ((-2..2).random()).toFloat()
-                    outerGear.translationY = ((-2..2).random()).toFloat()
-                } else {
-                    outerGear.translationX = 0f
-                    outerGear.translationY = 0f
-                }
+            if (!isListening && !isThinking && statusText.text.toString() in messages || statusText.text.toString().isEmpty()) {
+                statusText.setText(messages.random())
+                handler.postDelayed(this, 10000)
             }
-            handler.postDelayed(this, 30)
-        }
-    }
-
-    private val messageRunnable = object : Runnable {
-        override fun run() {
-            if (::statusText.isInitialized && !isListening) {
-                statusText.alpha = 0f
-                statusText.text = messages[currentMessageIndex]
-                statusText.animate().alpha(1f).setDuration(500).start()
-                currentMessageIndex = (currentMessageIndex + 1) % messages.size
-            }
-            handler.postDelayed(this, 2000)
         }
     }
 
@@ -111,6 +92,9 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             val sender = intent.getStringExtra("SENDER") ?: "Alguien"
             val message = intent.getStringExtra("MESSAGE") ?: ""
             handleNotification(appName, sender, message)
+        } else {
+            // Activación normal: Iniciar escucha inmediatamente
+            handler.postDelayed({ startListening() }, 1000)
         }
         return START_STICKY
     }
@@ -200,7 +184,7 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
                     if (isTtsInitialized) {
                         speak(script, "PROTOCOL_REPORT")
                     } else {
-                        statusText.text = "Jarvis listo (Voz no disponible)"
+                        statusText.setText("Jarvis listo (Voz no disponible)")
                     }
                 }
             }
@@ -254,7 +238,7 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             val inflater = LayoutInflater.from(contextWrapper)
             overlayView = inflater.inflate(R.layout.floating_pill_layout, null)
             
-            statusText = overlayView.findViewById(R.id.status_text)
+            statusText = overlayView.findViewById(R.id.status_text) ?: throw IllegalStateException("status_text not found")
             voiceWave = overlayView.findViewById(R.id.voice_wave)
             responseCard = overlayView.findViewById(R.id.response_card)
             responseText = overlayView.findViewById(R.id.response_text)
@@ -268,31 +252,109 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             setupSpeechRecognizer()
             setupTts()
 
+            micButton = overlayView.findViewById(R.id.mic_button)
+            micButton.setOnClickListener {
+                if (isListening) stopListening() else startListening()
+            }
+
             val params = WindowManager.LayoutParams(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or 
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or 
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS or
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or
                 WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR,
                 PixelFormat.TRANSLUCENT
             )
+            params.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
 
             params.gravity = Gravity.TOP or Gravity.START
 
             // Cierre al tocar el fondo
-            overlayView.setOnClickListener {
+            overlayView.findViewById<View>(R.id.overlay_root).setOnClickListener {
                 stopSelf()
+            }
+
+            val activateKeyboard = {
+                cancelListening() // Abortar mic agresivamente
+                if (overlayView.isAttachedToWindow) {
+                    params.flags = params.flags and WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE.inv()
+                    windowManager.updateViewLayout(overlayView, params)
+                }
+                statusText.requestFocus()
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(statusText, InputMethodManager.SHOW_IMPLICIT)
+            }
+
+            // Gestionar foco para el teclado y detectar clics directos en la caja de texto
+            statusText.setOnTouchListener { _, event ->
+                if (event.action == android.view.MotionEvent.ACTION_UP) {
+                    activateKeyboard()
+                }
+                false
+            }
+            
+            statusText.setOnFocusChangeListener { _, hasFocus ->
+                if (overlayView.isAttachedToWindow && !hasFocus) {
+                    params.flags = params.flags or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                    windowManager.updateViewLayout(overlayView, params)
+                }
+            }
+
+            statusText.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    val query = statusText.text.toString().trim()
+                    if (query.isNotEmpty()) {
+                        handleUserQuery(query)
+                        statusText.setText("")
+                        statusText.clearFocus()
+                        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                        imm.hideSoftInputFromWindow(statusText.windowToken, 0)
+                    }
+                    true
+                } else false
+            }
+
+            // Evitar que el clic en la píldora cierre el asistente
+            overlayView.findViewById<View>(R.id.pill_container).setOnClickListener {
+                activateKeyboard()
             }
 
             overlayView.findViewById<View>(R.id.close_response).setOnClickListener {
                 hideResponse()
             }
 
-            overlayView.findViewById<ImageView>(R.id.mic_button).setOnClickListener {
-                if (isListening) stopListening() else startListening()
+            // Detectar escritura para cambiar ícono a botón Enviar
+            micButton.tag = "MIC"
+            statusText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val currentText = s?.toString()?.trim() ?: ""
+                    // Si el usuario está escribiendo su propio texto (no del sistema)
+                    if (statusText.hasFocus() && currentText.isNotEmpty() && !messages.contains(currentText) && currentText != "Escuchando...") {
+                        micButton.setImageResource(android.R.drawable.ic_menu_send)
+                        micButton.tag = "SEND"
+                    } else {
+                        micButton.setImageResource(android.R.drawable.ic_btn_speak_now)
+                        micButton.tag = "MIC"
+                    }
+                }
+                override fun afterTextChanged(s: Editable?) {}
+            })
+
+            micButton.setOnClickListener {
+                if (micButton.tag == "SEND") {
+                    val query = statusText.text.toString().trim()
+                    if (query.isNotEmpty()) {
+                        handleUserQuery(query)
+                        statusText.setText("")
+                        statusText.clearFocus()
+                        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                        imm.hideSoftInputFromWindow(statusText.windowToken, 0)
+                    }
+                } else {
+                    if (isListening) stopListening() else startListening()
+                }
             }
 
             overlayView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -300,10 +362,13 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
                     or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION)
 
             windowManager.addView(overlayView, params)
-            handler.post(messageRunnable)
-            handler.post(gearRunnable)
+            
+            // Iniciar animaciones y rotaciones
+            startAvatarAnimations()
+            handler.post(statusUpdateRunnable)
+
         } catch (e: Exception) {
-            android.util.Log.e("HeySary", "Error crítico en onCreate: ${e.message}")
+            e.printStackTrace()
             stopSelf()
         }
     }
@@ -341,14 +406,15 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
                 override fun onResults(results: Bundle?) {
                     val data = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                     val text = data?.get(0) ?: ""
-                    handleRecognitionResult(text)
+                    handleUserQuery(text)
                 }
 
                 override fun onPartialResults(partialResults: Bundle?) {
                     val data = partialResults?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                     val text = data?.get(0) ?: ""
-                    if (text.isNotEmpty()) {
-                        statusText.text = text
+                    // Sólo mostrar resultados parciales si NO estamos escribiendo manualmente
+                    if (text.isNotEmpty() && !statusText.hasFocus()) {
+                        statusText.setText(text)
                         statusText.visibility = View.VISIBLE
                     }
                 }
@@ -374,8 +440,18 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
         updateUIForListening(false)
     }
 
-    private fun handleRecognitionResult(text: String) {
-        statusText.text = text
+    private fun cancelListening() {
+        speechRecognizer?.cancel() // Destruye inmediatamente el buffer de audio (no llama a onResults)
+        isListening = false
+        updateUIForListening(false)
+        val textStr = statusText.text.toString()
+        if (textStr == "Escuchando..." || textStr == "Sary a la orden...") {
+            statusText.setText("")
+        }
+    }
+
+    private fun handleUserQuery(text: String) {
+        statusText.setText(text)
         statusText.visibility = View.VISIBLE
         
         // Comandos de cierre
@@ -386,13 +462,13 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
         }
 
         // Estado: Sary pensando...
-        statusText.text = "Sary pensando..."
+        statusText.setText("Sary pensando...")
         isThinking = true
         voiceWave.setActive(true)
         // Animamos la onda de forma constante y suave mientras piensa
         handler.post(object : Runnable {
             override fun run() {
-                if (statusText.text == "Sary pensando...") {
+                if (statusText.text.toString() == "Sary pensando...") {
                     voiceWave.updateAmplitude(3f) // Pulso suave
                     handler.postDelayed(this, 100)
                 }
@@ -411,119 +487,110 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
     }
 
     private fun processAiResponse(response: String) {
-        var cleanText = response.replace(Regex("\\[.*?\\]"), "").trim()
+        // Limpieza profunda de símbolos para TTS y visualización
+        var cleanText = response.replace(Regex("\\[.*?\\]"), "")
+            .replace("*", "")
+            .replace("#", "")
+            .replace("_", "")
+            .trim()
         
         if (response.contains("[SEARCH_CONTACT:")) {
             val name = response.substringAfter("[SEARCH_CONTACT:").substringBefore("]").trim()
-            val contact = handleContactSearch(name)
+            val contacts = contactHelper.findContact(name)
+            val contact = contacts.firstOrNull()
             if (contact != null) {
-                cleanText = "He encontrado a ${contact.name} en tus contactos. ¿Deseas que inicie la llamada?"
+                pendingContact = contact
+                cleanText += "\n\nHe encontrado a ${contact.name}. ¿Desea que lo llame?"
+                speak(cleanText, "SARY_RESPONSE")
             } else {
-                cleanText = "Lo siento, no encontré a ningún contacto llamado $name."
+                speak("No encontré a ningún contacto llamado $name.", "SARY_RESPONSE")
             }
-        } 
-        else if (response.contains("[ACTION_CALL:")) {
-            val name = response.substringAfter("[ACTION_CALL:").substringBefore("]").trim()
-            val contact = handleCallAction(name)
-            if (contact != null) {
-                cleanText = "Entendido, llamando a ${contact.name}..."
-            } else {
-                cleanText = "No pude encontrar el número de $name para llamar."
+        } else if (response.contains("[CALL_CONTACT:")) {
+            pendingContact?.let {
+                makePhoneCall(it.phoneNumber)
+                pendingContact = null
+                speak("Llamando a ${it.name} ahora.", "SARY_RESPONSE")
+            } ?: run {
+                statusText.setText("¿A quién desea llamar?")
+                startListening()
             }
+        } else if (response.contains("[WHATSAPP_CONTACT:")) {
+            pendingContact?.let {
+                openWhatsApp(it.phoneNumber)
+                pendingContact = null
+                speak("Abriendo chat con ${it.name}.", "SARY_RESPONSE")
+            }
+        } else {
+            speak(cleanText, "SARY_RESPONSE")
         }
-        else if (response.contains("[CONFIRM_ACTION: TRUE]")) {
-            if (pendingContact != null) {
-                cleanText = "Llamando a ${pendingContact?.name}. Un gusto servirle señor, hasta luego."
-                executeCall(pendingContact!!)
-                speak(cleanText, "FAREWELL_AND_EXIT")
-                return // Salimos para evitar el flujo normal
-            } else {
-                cleanText = "No tengo ninguna acción pendiente para confirmar."
-            }
-        }
-
-        if (cleanText.isEmpty()) cleanText = "Hecho."
-
-        statusText.text = "Sary responde"
+        
         showResponse(cleanText)
-        speak(cleanText)
     }
 
-    private fun handleContactSearch(query: String): ContactInfo? {
-        val results = contactHelper.findContact(query)
-        return if (results.isNotEmpty()) {
-            val contact = results[0]
-            pendingContact = contact
-            showContactCard(contact)
-            contact
-        } else {
-            pendingContact = null
-            null
-        }
-    }
-
-    private fun handleCallAction(query: String): ContactInfo? {
-        val results = contactHelper.findContact(query)
-        return if (results.isNotEmpty()) {
-            val contact = results[0]
-            executeCall(contact)
-            contact
-        } else {
-            null
-        }
-    }
-
-    private fun showContactCard(contact: ContactInfo) {
-        dynamicContainer.removeAllViews()
-        val inflater = LayoutInflater.from(ContextThemeWrapper(this, R.style.Theme_HeySary))
-        val cardView = inflater.inflate(R.layout.contact_card_layout, dynamicContainer, false)
-        
-        cardView.findViewById<TextView>(R.id.contact_name).text = contact.name
-        cardView.findViewById<TextView>(R.id.contact_number).text = contact.phoneNumber
-        
-        if (contact.photoUri != null) {
-            cardView.findViewById<ImageView>(R.id.contact_photo).setImageURI(Uri.parse(contact.photoUri))
-        }
-
-        cardView.findViewById<View>(R.id.call_action_button).setOnClickListener {
-            executeCall(contact)
-        }
-
-        dynamicContainer.addView(cardView)
-        dynamicContainer.visibility = View.VISIBLE
-    }
-
-    private fun executeCall(contact: ContactInfo) {
+    private fun makePhoneCall(number: String) {
         try {
             val intent = Intent(Intent.ACTION_CALL).apply {
-                data = Uri.parse("tel:${contact.phoneNumber}")
+                data = Uri.parse("tel:$number")
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             startActivity(intent)
         } catch (e: Exception) {
-            speak("No tengo permisos suficientes para realizar la llamada directa.")
+            statusText.setText("No tengo permisos suficientes para realizar la llamada directa.")
         }
     }
 
+    private fun openWhatsApp(number: String) {
+        val uri = Uri.parse("https://api.whatsapp.com/send?phone=$number")
+        val intent = Intent(Intent.ACTION_VIEW, uri).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+        startActivity(intent)
+    }
+
+    private var typingJob: Job? = null
+
     private fun showResponse(text: String) {
-        responseText.text = text
+        typingJob?.cancel()
+        responseText.text = ""
         responseCard.visibility = View.VISIBLE
         responseCard.alpha = 0f
-        responseCard.translationY = 50f
+        responseCard.scaleX = 0.9f
+        responseCard.scaleY = 0.9f
+        
         responseCard.animate()
             .alpha(1f)
-            .translationY(0f)
-            .setDuration(400)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(500)
+            .setInterpolator(android.view.animation.OvershootInterpolator())
             .start()
+
+        // Efecto Máquina de Escribir (Typewriter)
+        typingJob = serviceScope.launch {
+            val words = text.split(" ")
+            val fullText = StringBuilder()
+            for (word in words) {
+                fullText.append(word).append(" ")
+                withContext(Dispatchers.Main) {
+                    responseText.text = fullText.toString()
+                }
+                delay(30) // Velocidad de "digitación"
+            }
+        }
     }
 
     private fun hideResponse() {
         if (responseCard.visibility == View.VISIBLE) {
+            typingJob?.cancel()
             responseCard.animate()
                 .alpha(0f)
-                .translationY(50f)
-                .setDuration(300)
-                .withEndAction { responseCard.visibility = View.GONE }
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .setDuration(400)
+                .withEndAction { 
+                    responseCard.visibility = View.GONE
+                    responseText.text = ""
+                }
                 .start()
         }
     }
@@ -566,7 +633,7 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
                             when (utteranceId) {
                                 "SARY_RESPONSE" -> {
                                     handler.postDelayed({
-                                        statusText.text = "¿Algo más en que te pueda ayudar?"
+                                        statusText.setText("¿Algo más en que te pueda ayudar?")
                                         startListening()
                                     }, 1000)
                                 }
@@ -603,28 +670,11 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             override fun run() {
                 if (isSarySpeaking) {
                     val amp = (5..12).random().toFloat()
-                    voiceWave.updateAmplitude(amp) // Ondas simuladas mientras habla
-                    updateAura(amp - 5f) // Sincronizamos el aura con la voz de Sary
-                    handler.postDelayed(this, 100)
+                    voiceWave.updateAmplitude(amp)
+                    handler.postDelayed(this, 80)
                 }
             }
         })
-    }
-
-    private fun updateAura(rmsDb: Float) {
-        if (!::coreGlow.isInitialized) return
-        
-        // Mapeamos la amplitud a escala (1.0 a 1.4) y opacidad (0.4 a 1.0)
-        val normalized = ((rmsDb + 2f) / 12f).coerceIn(0f, 1f)
-        val scale = 1.0f + (normalized * 0.4f)
-        val alpha = 0.4f + (normalized * 0.6f)
-        
-        coreGlow.animate()
-            .scaleX(scale)
-            .scaleY(scale)
-            .alpha(alpha)
-            .setDuration(100)
-            .start()
     }
 
     private fun speak(text: String, utteranceId: String = "SARY_RESPONSE") {
@@ -632,44 +682,78 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             val params = Bundle()
             params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId)
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
-        } else {
-            // Fallback si TTS falla
-            handler.postDelayed({
-                if (utteranceId == "FAREWELL_AND_EXIT") {
-                    stopSelf()
-                } else if (utteranceId != "PROTOCOL_REPORT" && utteranceId != "PROTOCOL_FINAL") {
-                    // Solo abrimos micro en respuestas normales, no en protocolos
-                    statusText.text = "¿Algo más en que te pueda ayudar?"
-                    startListening()
-                }
-            }, 4000)
         }
     }
 
+    private var isRunningProtocol = false 
+    
     private fun updateUIForListening(listening: Boolean) {
-        if (listening) {
-            voiceWave.visibility = View.VISIBLE
-            voiceWave.setActive(true)
-            statusText.text = "Escuchando..."
-        } else {
-            voiceWave.visibility = View.GONE
-            voiceWave.setActive(false)
+        handler.post {
+            if (listening) {
+                if (!statusText.hasFocus()) {
+                    statusText.setText("Escuchando...")
+                }
+                micButton.setColorFilter(android.graphics.Color.RED)
+                voiceWave.visibility = View.VISIBLE
+                voiceWave.setActive(true)
+            } else {
+                val currentText = statusText.text.toString()
+                if (!statusText.hasFocus() && (currentText == "Escuchando..." || currentText.isEmpty())) {
+                    statusText.setText("Sary a la orden...")
+                }
+                micButton.setColorFilter(android.graphics.Color.WHITE)
+                voiceWave.visibility = View.GONE
+                voiceWave.setActive(false)
+            }
         }
     }
+
+    private fun updateAura(amplitude: Float) {
+        val scale = 1f + (amplitude / 30f)
+        coreGlow.animate()
+            .scaleX(scale)
+            .scaleY(scale)
+            .setDuration(50)
+            .start()
+    }
+
+    private fun startAvatarAnimations() {
+        val outerAnim = android.view.animation.RotateAnimation(
+            0f, 360f,
+            android.view.animation.Animation.RELATIVE_TO_SELF, 0.5f,
+            android.view.animation.Animation.RELATIVE_TO_SELF, 0.5f
+        ).apply {
+            duration = 10000
+            repeatCount = android.view.animation.Animation.INFINITE
+            interpolator = android.view.animation.LinearInterpolator()
+        }
+
+        val innerAnim = android.view.animation.RotateAnimation(
+            360f, 0f,
+            android.view.animation.Animation.RELATIVE_TO_SELF, 0.5f,
+            android.view.animation.Animation.RELATIVE_TO_SELF, 0.5f
+        ).apply {
+            duration = 15000
+            repeatCount = android.view.animation.Animation.INFINITE
+            interpolator = android.view.animation.LinearInterpolator()
+        }
+
+        outerGear.startAnimation(outerAnim)
+        innerGear.startAnimation(innerAnim)
+    }
+
+    private lateinit var micButton: ImageView
 
     override fun onDestroy() {
         super.onDestroy()
-        if (::overlayView.isInitialized) {
-            try {
-                windowManager.removeView(overlayView)
-            } catch (e: Exception) {
-                android.util.Log.e("HeySary", "Error al limpiar overlay: ${e.message}")
-            }
-        }
-        serviceScope.cancel()
-        handler.removeCallbacks(messageRunnable)
         speechRecognizer?.destroy()
+        tts?.stop()
         tts?.shutdown()
         soundManager.release()
+        serviceScope.cancel()
+        handler.removeCallbacks(statusUpdateRunnable)
+        if (::overlayView.isInitialized) {
+            windowManager.removeView(overlayView)
+        }
     }
 }

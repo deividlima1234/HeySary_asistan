@@ -9,6 +9,7 @@ color overlay_dim
 color white
 drawable avatar_glow_bg
 drawable dashboard_avatar
+drawable hud_card_bg
 drawable ic_launcher
 drawable jarvis_gear
 drawable pill_background

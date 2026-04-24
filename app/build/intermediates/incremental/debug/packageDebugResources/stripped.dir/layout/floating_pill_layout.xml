@@ -77,57 +77,76 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Caja de Respuesta Expandible (Pro) -->
-        <androidx.cardview.widget.CardView
+        <!-- Caja de Respuesta Estilo HUD Jarvis -->
+        <FrameLayout
             android:id="@+id/response_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:visibility="gone"
-            app:cardBackgroundColor="#1A1A1A"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="8dp">
+            android:background="@drawable/hud_card_bg">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!-- Header Tecnológico -->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp">
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="8dp"
-                        android:text="Sary Intelligence"
-                        android:textColor="@color/cyberpunk_red"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="12dp"
+                            android:background="@color/cyberpunk_red"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SARY INTELLIGENCE // HUD.v2"
+                            android:textColor="@color/cyberpunk_red"
+                            android:textSize="10sp"
+                            android:letterSpacing="0.1"
+                            android:fontFamily="serif-monospace"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/close_response"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
                         android:layout_alignParentEnd="true"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:padding="6dp"
+                        android:alpha="0.7"
+                        android:padding="4dp"
                         android:src="@android:drawable/ic_menu_close_clear_cancel"
-                        app:tint="@color/white" />
+                        app:tint="@color/cyberpunk_red" />
                 </RelativeLayout>
 
-                <!-- Línea Neón Roja Decorativa -->
+                <!-- Divisor Decorativo -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/cyberpunk_red" />
+                    android:alpha="0.3"
+                    android:background="@color/cyberpunk_red"
+                    android:layout_marginHorizontal="16dp" />
 
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="300dp"
                     android:padding="16dp">
 
                     <LinearLayout
@@ -139,10 +158,11 @@
                             android:id="@+id/response_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:lineSpacingExtra="4dp"
-                            android:text="Respuesta de la IA..."
+                            android:lineSpacingExtra="6dp"
+                            android:text="Iniciando protocolos..."
                             android:textColor="@color/white"
-                            android:textSize="16sp" />
+                            android:fontFamily="serif-monospace"
+                            android:textSize="15sp" />
 
                         <FrameLayout
                             android:id="@+id/dynamic_content_container"
@@ -152,8 +172,20 @@
                     </LinearLayout>
                 </androidx.core.widget.NestedScrollView>
 
+                <!-- Footer Decorativo (Bits de datos) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:padding="8dp"
+                    android:alpha="0.4"
+                    android:text="STATUS: ACTIVE | ENCRYPTED: AES-256"
+                    android:textColor="@color/white"
+                    android:textSize="8sp"
+                    android:fontFamily="serif-monospace" />
+
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </FrameLayout>
 
         <!-- Píldora de Entrada (Principal) -->
         <LinearLayout
@@ -163,7 +195,9 @@
             android:background="@drawable/pill_background"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/assistant_logo"
@@ -173,16 +207,21 @@
                 android:src="@android:drawable/ic_menu_info_details"
                 app:tint="@color/white" />
 
-            <TextView
+            <EditText
                 android:id="@+id/status_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
-                android:text="Sary a la orden..."
+                android:background="@null"
+                android:hint="DI algo o escribe aquí..."
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textColorHint="#88FFFFFF"
+                android:textSize="14sp"
+                android:imeOptions="actionSend"
+                android:inputType="textCapSentences"
+                android:maxLines="2" />
 
             <com.eddam.heysary.VoiceWaveView
                 android:id="@+id/voice_wave"

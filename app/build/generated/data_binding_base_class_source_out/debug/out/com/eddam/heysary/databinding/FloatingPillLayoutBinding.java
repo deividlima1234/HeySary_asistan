@@ -4,6 +4,7 @@ package com.eddam.heysary.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
@@ -60,13 +60,13 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
   public final LinearLayout pillContainer;
 
   @NonNull
-  public final CardView responseCard;
+  public final FrameLayout responseCard;
 
   @NonNull
   public final TextView responseText;
 
   @NonNull
-  public final TextView statusText;
+  public final EditText statusText;
 
   @NonNull
   public final VoiceWaveView voiceWave;
@@ -77,8 +77,8 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
       @NonNull FrameLayout dynamicContentContainer, @NonNull ImageView innerGear,
       @NonNull ShapeableImageView jarvisCore, @NonNull AppCompatImageView micButton,
       @NonNull ImageView outerGear, @NonNull FrameLayout overlayRoot,
-      @NonNull LinearLayout pillContainer, @NonNull CardView responseCard,
-      @NonNull TextView responseText, @NonNull TextView statusText,
+      @NonNull LinearLayout pillContainer, @NonNull FrameLayout responseCard,
+      @NonNull TextView responseText, @NonNull EditText statusText,
       @NonNull VoiceWaveView voiceWave) {
     this.rootView = rootView;
     this.assistantLogo = assistantLogo;
@@ -188,7 +188,7 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
       }
 
       id = R.id.response_card;
-      CardView responseCard = ViewBindings.findChildViewById(rootView, id);
+      FrameLayout responseCard = ViewBindings.findChildViewById(rootView, id);
       if (responseCard == null) {
         break missingId;
       }
@@ -200,7 +200,7 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
       }
 
       id = R.id.status_text;
-      TextView statusText = ViewBindings.findChildViewById(rootView, id);
+      EditText statusText = ViewBindings.findChildViewById(rootView, id);
       if (statusText == null) {
         break missingId;
       }
