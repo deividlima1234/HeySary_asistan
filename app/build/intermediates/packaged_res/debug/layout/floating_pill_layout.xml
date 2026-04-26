@@ -143,10 +143,22 @@
                     android:background="@color/cyberpunk_red"
                     android:layout_marginHorizontal="16dp" />
 
-                <androidx.core.widget.NestedScrollView
+                <!-- CONTENEDOR DE CHAT (REEMPLAZA SCROLLVIEW SIMPLE) -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/chat_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxHeight="300dp"
+                    android:padding="8dp"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"/>
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/legacy_scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="300dp"
+                    android:visibility="gone"
                     android:padding="16dp">
 
                     <LinearLayout

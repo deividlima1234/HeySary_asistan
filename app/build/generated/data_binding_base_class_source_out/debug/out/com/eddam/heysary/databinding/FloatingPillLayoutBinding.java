@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.eddam.heysary.R;
@@ -33,6 +35,9 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
   public final ConstraintLayout avatarStack;
 
   @NonNull
+  public final RecyclerView chatRecycler;
+
+  @NonNull
   public final AppCompatImageView closeResponse;
 
   @NonNull
@@ -46,6 +51,9 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
 
   @NonNull
   public final ShapeableImageView jarvisCore;
+
+  @NonNull
+  public final NestedScrollView legacyScroll;
 
   @NonNull
   public final AppCompatImageView micButton;
@@ -73,9 +81,10 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
 
   private FloatingPillLayoutBinding(@NonNull FrameLayout rootView,
       @NonNull AppCompatImageView assistantLogo, @NonNull ConstraintLayout avatarStack,
-      @NonNull AppCompatImageView closeResponse, @NonNull View coreGlow,
-      @NonNull FrameLayout dynamicContentContainer, @NonNull ImageView innerGear,
-      @NonNull ShapeableImageView jarvisCore, @NonNull AppCompatImageView micButton,
+      @NonNull RecyclerView chatRecycler, @NonNull AppCompatImageView closeResponse,
+      @NonNull View coreGlow, @NonNull FrameLayout dynamicContentContainer,
+      @NonNull ImageView innerGear, @NonNull ShapeableImageView jarvisCore,
+      @NonNull NestedScrollView legacyScroll, @NonNull AppCompatImageView micButton,
       @NonNull ImageView outerGear, @NonNull FrameLayout overlayRoot,
       @NonNull LinearLayout pillContainer, @NonNull FrameLayout responseCard,
       @NonNull TextView responseText, @NonNull EditText statusText,
@@ -83,11 +92,13 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
     this.rootView = rootView;
     this.assistantLogo = assistantLogo;
     this.avatarStack = avatarStack;
+    this.chatRecycler = chatRecycler;
     this.closeResponse = closeResponse;
     this.coreGlow = coreGlow;
     this.dynamicContentContainer = dynamicContentContainer;
     this.innerGear = innerGear;
     this.jarvisCore = jarvisCore;
+    this.legacyScroll = legacyScroll;
     this.micButton = micButton;
     this.outerGear = outerGear;
     this.overlayRoot = overlayRoot;
@@ -137,6 +148,12 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.chat_recycler;
+      RecyclerView chatRecycler = ViewBindings.findChildViewById(rootView, id);
+      if (chatRecycler == null) {
+        break missingId;
+      }
+
       id = R.id.close_response;
       AppCompatImageView closeResponse = ViewBindings.findChildViewById(rootView, id);
       if (closeResponse == null) {
@@ -164,6 +181,12 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
       id = R.id.jarvis_core;
       ShapeableImageView jarvisCore = ViewBindings.findChildViewById(rootView, id);
       if (jarvisCore == null) {
+        break missingId;
+      }
+
+      id = R.id.legacy_scroll;
+      NestedScrollView legacyScroll = ViewBindings.findChildViewById(rootView, id);
+      if (legacyScroll == null) {
         break missingId;
       }
 
@@ -212,8 +235,9 @@ public final class FloatingPillLayoutBinding implements ViewBinding {
       }
 
       return new FloatingPillLayoutBinding((FrameLayout) rootView, assistantLogo, avatarStack,
-          closeResponse, coreGlow, dynamicContentContainer, innerGear, jarvisCore, micButton,
-          outerGear, overlayRoot, pillContainer, responseCard, responseText, statusText, voiceWave);
+          chatRecycler, closeResponse, coreGlow, dynamicContentContainer, innerGear, jarvisCore,
+          legacyScroll, micButton, outerGear, overlayRoot, pillContainer, responseCard,
+          responseText, statusText, voiceWave);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

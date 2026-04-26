@@ -8,6 +8,8 @@ color gray_accent
 color overlay_dim
 color white
 drawable avatar_glow_bg
+drawable bg_chat_sary
+drawable bg_chat_user
 drawable dashboard_avatar
 drawable hud_card_bg
 drawable ic_launcher
@@ -34,6 +36,7 @@ id card_audio
 id card_notifications
 id card_tts
 id card_whatsapp
+id chat_recycler
 id clock_text
 id close_response
 id contact_name
@@ -43,11 +46,13 @@ id core_glow
 id date_text
 id dynamic_content_container
 id et_autopilot_context
+id header_accent
 id header_container
 id header_title
 id inner_gear
 id jarvis_core
 id label_read_notif
+id legacy_scroll
 id loading_bar
 id loading_spinner
 id location_text
@@ -71,6 +76,8 @@ id save_config_btn
 id settings_title
 id startButton
 id status_card
+id status_icon
+id status_pulse
 id status_text
 id subtitle_text
 id switch_autopilot
@@ -82,10 +89,15 @@ id tts_cloud_container
 id tts_engine_spinner
 id tts_load_voices_btn
 id tts_voice_spinner
+id tvMessage
+id user_info_layout
+id user_name_text
+id user_phone_text
 id voice_wave
 id volume_seekbar
 id weather_container
 id whatsapp_ip_edit
+id whatsapp_subtitle
 id whatsapp_title
 id whatsapp_token_edit
 id widget_mic_button
@@ -100,6 +112,7 @@ layout contact_card_layout
 layout custom_spinner_item
 layout floating_pill_layout
 layout item_app_whitelist
+layout item_chat
 layout widget_layout
 menu bottom_menu
 raw protocolo

@@ -5,6 +5,8 @@
     <color name="cyberpunk_black">#000000</color>
     <color name="cyberpunk_red">#FF0033</color>
     <color name="cyberpunk_red_glow">#4DFF0033</color> <!-- 30% opacidad -->
+    <color name="cyberpunk_green">#00FF66</color>
+    <color name="cyberpunk_green_glow">#4D00FF66</color>
     <color name="overlay_dim">#99000000</color>
     <color name="gray_accent">#888888</color>
 </resources>

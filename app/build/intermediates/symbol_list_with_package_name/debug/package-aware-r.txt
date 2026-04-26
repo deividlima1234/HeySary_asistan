@@ -3014,6 +3014,8 @@ drawable abc_vector_test
 drawable avatar_glow_bg
 drawable avd_hide_password
 drawable avd_show_password
+drawable bg_chat_sary
+drawable bg_chat_user
 drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
@@ -3281,6 +3283,7 @@ id center_vertical
 id chain
 id chain2
 id chains
+id chat_recycler
 id checkbox
 id checked
 id chronometer
@@ -3390,6 +3393,7 @@ id group_divider
 id grouping
 id groups
 id hardware
+id header_accent
 id header_container
 id header_title
 id hide_ime_id
@@ -3423,6 +3427,7 @@ id layout
 id left
 id leftToRight
 id legacy
+id legacy_scroll
 id light
 id line1
 id line3
@@ -3638,6 +3643,8 @@ id startVertical
 id staticLayout
 id staticPostLayout
 id status_card
+id status_icon
+id status_pulse
 id status_text
 id stop
 id stretch
@@ -3700,11 +3707,15 @@ id tts_cloud_container
 id tts_engine_spinner
 id tts_load_voices_btn
 id tts_voice_spinner
+id tvMessage
 id unchecked
 id uniform
 id unlabeled
 id up
 id useLogo
+id user_info_layout
+id user_name_text
+id user_phone_text
 id vertical_only
 id view_offset_helper
 id view_transition
@@ -3719,6 +3730,7 @@ id volume_seekbar
 id weather_container
 id west
 id whatsapp_ip_edit
+id whatsapp_subtitle
 id whatsapp_title
 id whatsapp_token_edit
 id wide
@@ -3875,6 +3887,7 @@ layout floating_pill_layout
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_app_whitelist
+layout item_chat
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
