@@ -1408,6 +1408,8 @@ color common_google_signin_btn_text_light_focused
 color common_google_signin_btn_text_light_pressed
 color common_google_signin_btn_tint
 color cyberpunk_black
+color cyberpunk_green
+color cyberpunk_green_glow
 color cyberpunk_red
 color cyberpunk_red_glow
 color design_bottom_navigation_shadow_color
@@ -3012,6 +3014,7 @@ drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avatar_glow_bg
+drawable avatar_glow_green
 drawable avd_hide_password
 drawable avd_show_password
 drawable bg_chat_sary
@@ -3246,6 +3249,7 @@ id autoCompleteToEnd
 id autoCompleteToStart
 id automatic
 id autopilot_container
+id avatar_container
 id avatar_stack
 id background_gradient
 id barrier
@@ -3642,8 +3646,9 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id status_avatar
 id status_card
-id status_icon
+id status_gear
 id status_pulse
 id status_text
 id stop

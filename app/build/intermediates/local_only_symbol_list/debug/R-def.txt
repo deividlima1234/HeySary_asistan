@@ -2,12 +2,15 @@ R_DEF: Internal format may change without notice
 local
 color black
 color cyberpunk_black
+color cyberpunk_green
+color cyberpunk_green_glow
 color cyberpunk_red
 color cyberpunk_red_glow
 color gray_accent
 color overlay_dim
 color white
 drawable avatar_glow_bg
+drawable avatar_glow_green
 drawable bg_chat_sary
 drawable bg_chat_user
 drawable dashboard_avatar
@@ -23,6 +26,7 @@ id app_switch
 id apps_recycler
 id assistant_logo
 id autopilot_container
+id avatar_container
 id avatar_stack
 id background_gradient
 id battery_text
@@ -75,8 +79,9 @@ id response_text
 id save_config_btn
 id settings_title
 id startButton
+id status_avatar
 id status_card
-id status_icon
+id status_gear
 id status_pulse
 id status_text
 id subtitle_text

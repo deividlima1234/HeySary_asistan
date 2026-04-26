@@ -12,12 +12,16 @@
         "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/drawable/dashboard_avatar.png"
     },
     {
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-merged_res-35:/drawable_ic_launcher.xml.flat",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/drawable/ic_launcher.xml"
+    },
+    {
         "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-merged_res-35:/layout_item_app_whitelist.xml.flat",
         "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/item_app_whitelist.xml"
     },
     {
-        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-merged_res-35:/drawable_ic_launcher.xml.flat",
-        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/drawable/ic_launcher.xml"
+        "merged": "com.eddam.heysary.app-merged_res-35:/drawable_avatar_glow_green.xml.flat",
+        "source": "com.eddam.heysary.app-main-37:/drawable/avatar_glow_green.xml"
     },
     {
         "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-merged_res-35:/layout_activity_main.xml.flat",

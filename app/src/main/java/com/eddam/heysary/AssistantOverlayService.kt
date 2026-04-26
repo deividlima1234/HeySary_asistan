@@ -603,14 +603,16 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
                  val targetName = parts[0].trim()
                  val targetMessage = parts[1].trim()
 
-                 val contacts = contactHelper.findContact(targetName)
-                 val targetNumber = contacts.firstOrNull()?.phoneNumber?.replace("[^0-9]".toRegex(), "") 
-                    ?: pendingContact?.phoneNumber?.replace("[^0-9]".toRegex(), "") 
-                    ?: targetName.replace("[^0-9]".toRegex(), "") 
-                 
-                 pendingContact = null
+                  val contacts = if (targetName.isNotEmpty()) contactHelper.findContact(targetName) else emptyList()
+                  val targetNumber = if (contacts.isNotEmpty()) {
+                      contacts.firstOrNull()?.phoneNumber?.replace("[^0-9]".toRegex(), "")
+                  } else {
+                      // Si Groq no encuentra el nombre o es genérico ("él", "ella", "usuario"), usar el contacto pendiente
+                      pendingContact?.phoneNumber?.replace("[^0-9]".toRegex(), "")
+                          ?: targetName.replace("[^0-9]".toRegex(), "")
+                  }
 
-                 if (targetNumber.isNotEmpty()) {
+                  if (targetNumber != null && targetNumber.isNotEmpty()) {
                      serviceScope.launch {
                          // Paso 1: Notificar inicio de envío
                          val startMsg = "Entendido señor, enviando mensaje a $targetName..."
