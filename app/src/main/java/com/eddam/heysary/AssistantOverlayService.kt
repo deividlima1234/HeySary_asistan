@@ -29,6 +29,8 @@ import android.text.Editable
 import java.util.Locale
 import kotlinx.coroutines.*
 import android.view.ContextThemeWrapper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import java.util.ArrayList
 
 class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
@@ -38,7 +40,9 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
     private lateinit var statusText: EditText
     private lateinit var voiceWave: VoiceWaveView
     private lateinit var responseCard: View
-    private lateinit var responseText: TextView
+    private lateinit var chatRecycler: RecyclerView
+    private lateinit var chatAdapter: ChatAdapter
+    private val chatMessages = mutableListOf<ChatMessage>()
     private lateinit var dynamicContainer: FrameLayout
     
     // Vistas del Avatar Animado
@@ -70,6 +74,7 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
 
     private var isListening = false
     private var isThinking = false
+    private var isProcessingNotification = false
 
     private val statusUpdateRunnable = object : Runnable {
         override fun run() {
@@ -192,26 +197,80 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
     }
 
     private fun handleNotification(appName: String, sender: String, message: String) {
+        // Ignorar si Jarvis está ocupado interactuando o analizando una cascada de mensajes
+        if (isThinking || isListening || isSarySpeaking || isProcessingNotification) {
+            return
+        }
+        isProcessingNotification = true
+
         serviceScope.launch {
-            var uiRetry = 0
-            while (!::overlayView.isInitialized && uiRetry < 10) {
-                delay(500)
-                uiRetry++
+            try {
+                var uiRetry = 0
+                while (!::overlayView.isInitialized && uiRetry < 10) {
+                    delay(500)
+                    uiRetry++
+                }
+
+                var ttsRetry = 0
+                while (!isTtsInitialized && ttsRetry < 20) {
+                    delay(250)
+                    ttsRetry++
+                }
+
+                if (appName.contains("WhatsApp", ignoreCase = true)) {
+                if (prefs.isAutoPilotWhatsapp) {
+                    val autoReply = groqClient.getWhatsAppAutoReply(sender, message, prefs.whatsappAutoPilotContext)
+                    
+                    withContext(Dispatchers.Main) {
+                        if (::overlayView.isInitialized) {
+                            showResponse("Auto-Pilot: Enviando respuesta a $sender...")
+                            speak("He respondido automáticamente a $sender según el piloto automático.", "FAREWELL_AND_EXIT")
+                        }
+                    }
+
+                    // Enviar vía Gateway
+                    val contacts = contactHelper.findContact(sender)
+                    val phone = contacts.firstOrNull()?.phoneNumber?.replace("[^0-9]".toRegex(), "") 
+                        ?: sender.replace("[^0-9]".toRegex(), "") 
+                    
+                    if (phone.isNotEmpty()) {
+                        val gateway = WhatsappGatewayClient(this@AssistantOverlayService)
+                        gateway.sendMessage(phone, autoReply)
+                    }
+                    return@launch
+                } else {
+                    // Modo Interactivo (Opción B)
+                    val readText = "Señor, $sender dice: $message. ¿Desea que responda?"
+                    val contacts = contactHelper.findContact(sender)
+                    // Guardar como fallback
+                    pendingContact = contacts.firstOrNull() ?: ContactInfo(sender, sender)
+
+                    // Inyectar en el cerebro de Groq para que entienda el contexto cuando responda
+                    groqClient.injectContext("Acabas de notificarle al usuario: '$readText'. Si el usuario dice que sí o dicta una respuesta, usa [REPLY_WHATSAPP: $sender | mensaje].")
+
+                    withContext(Dispatchers.Main) {
+                        if (::overlayView.isInitialized) {
+                            showResponse(readText)
+                            speak(readText, "SARY_WHATSAPP_ASK")
+                        }
+                    }
+                    return@launch
+                }
             }
 
+            // Notificación Normal
             val response = groqClient.getNotificationResponse(appName, sender, message)
-
-            var ttsRetry = 0
-            while (!isTtsInitialized && ttsRetry < 20) {
-                delay(250)
-                ttsRetry++
-            }
 
             withContext(Dispatchers.Main) {
                 if (::overlayView.isInitialized) {
                     showResponse(response)
                     speak(response, "NOTIFICATION_READ")
                 }
+            }
+            } finally {
+                // Liberar el seguro después de 3 segundos para evitar bloqueos por notificaciones simultáneas
+                delay(3000)
+                isProcessingNotification = false
             }
         }
     }
@@ -241,7 +300,12 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             statusText = overlayView.findViewById(R.id.status_text) ?: throw IllegalStateException("status_text not found")
             voiceWave = overlayView.findViewById(R.id.voice_wave)
             responseCard = overlayView.findViewById(R.id.response_card)
-            responseText = overlayView.findViewById(R.id.response_text)
+            chatRecycler = overlayView.findViewById(R.id.chat_recycler)
+            chatAdapter = ChatAdapter(chatMessages)
+            chatRecycler.layoutManager = LinearLayoutManager(this).apply { 
+                stackFromEnd = true 
+            }
+            chatRecycler.adapter = chatAdapter
             dynamicContainer = overlayView.findViewById(R.id.dynamic_content_container)
             
             // Inicialización de vistas del avatar
@@ -395,8 +459,13 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
 
                 override fun onError(error: Int) {
                     if (error == SpeechRecognizer.ERROR_NO_MATCH || error == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
-                        // Reiniciar si no escuchó nada para mantener conversación continua
-                        startListening()
+                        silenceRetries++
+                        if (silenceRetries >= 2) {
+                            val txt = "Cerrando sesión de voz por inactividad."
+                            speak(txt, "FAREWELL_AND_EXIT") { showResponse(txt) }
+                        } else {
+                            startListening()
+                        }
                     } else {
                         isListening = false
                         updateUIForListening(false)
@@ -404,6 +473,7 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
                 }
 
                 override fun onResults(results: Bundle?) {
+                    silenceRetries = 0
                     val data = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
                     val text = data?.get(0) ?: ""
                     handleUserQuery(text)
@@ -461,6 +531,9 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             return
         }
 
+        // Añadir mensaje del usuario al chat
+        addChatMessage(text, true)
+
         // Estado: Sary pensando...
         statusText.setText("Sary pensando...")
         isThinking = true
@@ -501,15 +574,17 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             if (contact != null) {
                 pendingContact = contact
                 cleanText += "\n\nHe encontrado a ${contact.name}. ¿Desea que lo llame?"
-                speak(cleanText, "SARY_RESPONSE")
+                speak(cleanText, "SARY_RESPONSE") { showResponse(cleanText) }
             } else {
-                speak("No encontré a ningún contacto llamado $name.", "SARY_RESPONSE")
+                val txt = "No encontré a ningún contacto llamado $name."
+                speak(txt, "SARY_RESPONSE") { showResponse(txt) }
             }
         } else if (response.contains("[CALL_CONTACT:")) {
             pendingContact?.let {
                 makePhoneCall(it.phoneNumber)
                 pendingContact = null
-                speak("Llamando a ${it.name} ahora.", "SARY_RESPONSE")
+                val txt = "Llamando a ${it.name} ahora."
+                speak(txt, "SARY_RESPONSE") { showResponse(txt) }
             } ?: run {
                 statusText.setText("¿A quién desea llamar?")
                 startListening()
@@ -518,13 +593,62 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             pendingContact?.let {
                 openWhatsApp(it.phoneNumber)
                 pendingContact = null
-                speak("Abriendo chat con ${it.name}.", "SARY_RESPONSE")
+                val txt = "Abriendo chat con ${it.name}."
+                speak(txt, "SARY_RESPONSE") { showResponse(txt) }
             }
+        } else if (response.contains("[REPLY_WHATSAPP:")) {
+             val content = response.substringAfter("[REPLY_WHATSAPP:").substringBefore("]")
+             val parts = content.split("|", limit = 2)
+             if (parts.size == 2) {
+                 val targetName = parts[0].trim()
+                 val targetMessage = parts[1].trim()
+
+                 val contacts = contactHelper.findContact(targetName)
+                 val targetNumber = contacts.firstOrNull()?.phoneNumber?.replace("[^0-9]".toRegex(), "") 
+                    ?: pendingContact?.phoneNumber?.replace("[^0-9]".toRegex(), "") 
+                    ?: targetName.replace("[^0-9]".toRegex(), "") 
+                 
+                 pendingContact = null
+
+                 if (targetNumber.isNotEmpty()) {
+                     serviceScope.launch {
+                         // Paso 1: Notificar inicio de envío
+                         val startMsg = "Entendido señor, enviando mensaje a $targetName..."
+                         withContext(Dispatchers.Main) {
+                             showResponse(startMsg)
+                             speak(startMsg, "SARY_WHATSAPP_START")
+                         }
+
+                         val gateway = WhatsappGatewayClient(this@AssistantOverlayService)
+                         val success = gateway.sendMessage(targetNumber, targetMessage)
+                         withContext(Dispatchers.Main) {
+                             if (success) {
+                                 val txt = "Mensaje enviado a $targetName correctamente. ¿Desea decir algo más señor?"
+                                 // Mantener el pendingContact para el hilo de conversación si dice "sí, dile que..."
+                                 pendingContact = contacts.firstOrNull() ?: ContactInfo(targetName, targetNumber)
+                                 speak(txt, "SARY_WHATSAPP_ASK") { showResponse(txt) }
+                             } else {
+                                 val txt = "Lo siento señor, hubo un contratiempo y no pude contactar al servidor de WhatsApp."
+                                 speak(txt, "SARY_RESPONSE") { showResponse(txt) }
+                             }
+                         }
+                     }
+                 } else {
+                     val txt = "No encontré el número de WhatsApp."
+                     speak(txt, "SARY_RESPONSE") { showResponse(txt) }
+                 }
+                 return
+             } else {
+                 val txt = "Hubo un error al estructurar el mensaje."
+                 speak(txt, "SARY_RESPONSE") { showResponse(txt) }
+             }
+        } else if (response.contains("[FAREWELL_ACTION]")) {
+            val finalClean = cleanText.replace("[FAREWELL_ACTION]", "").trim()
+            speak(finalClean, "FAREWELL_AND_EXIT") { showResponse(finalClean) }
         } else {
-            speak(cleanText, "SARY_RESPONSE")
+            speak(cleanText, "SARY_RESPONSE") { showResponse(cleanText) }
         }
-        
-        showResponse(cleanText)
+
     }
 
     private fun makePhoneCall(number: String) {
@@ -548,10 +672,11 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
     }
 
     private var typingJob: Job? = null
+    private var silenceRetries = 0
 
     private fun showResponse(text: String) {
-        typingJob?.cancel()
-        responseText.text = ""
+        addChatMessage(text, false)
+        
         responseCard.visibility = View.VISIBLE
         responseCard.alpha = 0f
         responseCard.scaleX = 0.9f
@@ -564,24 +689,23 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
             .setDuration(500)
             .setInterpolator(android.view.animation.OvershootInterpolator())
             .start()
+    }
 
-        // Efecto Máquina de Escribir (Typewriter)
-        typingJob = serviceScope.launch {
-            val words = text.split(" ")
-            val fullText = StringBuilder()
-            for (word in words) {
-                fullText.append(word).append(" ")
-                withContext(Dispatchers.Main) {
-                    responseText.text = fullText.toString()
-                }
-                delay(30) // Velocidad de "digitación"
+    private fun addChatMessage(content: String, isUser: Boolean) {
+        if (content.isEmpty() || content == "Sary pensando...") return
+        
+        serviceScope.launch(Dispatchers.Main) {
+            chatAdapter.addMessage(ChatMessage(content, isUser))
+            chatRecycler.smoothScrollToPosition(chatAdapter.itemCount - 1)
+            
+            if (chatAdapter.itemCount > 0) {
+                responseCard.visibility = View.VISIBLE
             }
         }
     }
 
     private fun hideResponse() {
         if (responseCard.visibility == View.VISIBLE) {
-            typingJob?.cancel()
             responseCard.animate()
                 .alpha(0f)
                 .scaleX(0.9f)
@@ -589,7 +713,8 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
                 .setDuration(400)
                 .withEndAction { 
                     responseCard.visibility = View.GONE
-                    responseText.text = ""
+                    chatMessages.clear()
+                    chatAdapter.notifyDataSetChanged()
                 }
                 .start()
         }
@@ -638,14 +763,17 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
                                     }, 1000)
                                 }
                                 "PROTOCOL_REPORT" -> {
-                                    // Eliminamos la frase fija para dejar que la IA maneje la despedida contextual.
-                                    // El SoundManager completará su reproducción al 100% y cerrará el servicio.
                                     isRunningProtocol = false 
                                 }
                                 "NOTIFICATION_READ" -> {
                                     handler.postDelayed({
                                         stopSelf()
                                     }, 2500) // 2.5 seg para que el usuario lea el texto si desea
+                                }
+                                "SARY_WHATSAPP_ASK" -> {
+                                    handler.postDelayed({
+                                        startListening()
+                                    }, 500)
                                 }
                                 "FAREWELL_AND_EXIT" -> {
                                     handler.postDelayed({
@@ -677,11 +805,100 @@ class AssistantOverlayService : Service(), TextToSpeech.OnInitListener {
         })
     }
 
-    private fun speak(text: String, utteranceId: String = "SARY_RESPONSE") {
+    private var cloudMediaPlayer: android.media.MediaPlayer? = null
+    private fun speak(text: String, utteranceId: String = "SARY_RESPONSE", onReady: (() -> Unit)? = null) {
+        val prefs = SaryPreferences.getInstance(this)
+        val engine = prefs.ttsEngine
+        
+        if (engine == SaryPreferences.ENGINE_NATIVE) {
+            onReady?.invoke()
+            speakNative(text, utteranceId)
+        } else {
+            // Intentar generar voz con Nube (ElevenLabs o Google)
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val audioData = if (engine == SaryPreferences.ENGINE_ELEVENLABS) {
+                        ElevenLabsClient(this@AssistantOverlayService).generateSpeech(text)
+                    } else {
+                        ResembleAiClient(this@AssistantOverlayService).generateSpeech(text)
+                    }
+                    playCloudTts(audioData, utteranceId, onReady)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    // Fallback automático a Nativo si falla Resemble o ElevenLabs
+                    withContext(Dispatchers.Main) { onReady?.invoke() }
+                    speakNative(text, utteranceId)
+                }
+            }
+        }
+    }
+
+    private fun speakNative(text: String, utteranceId: String) {
         if (isTtsInitialized) {
             val params = Bundle()
             params.putString(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId)
             tts?.speak(text, TextToSpeech.QUEUE_FLUSH, params, utteranceId)
+        }
+    }
+
+    private fun playCloudTts(audioData: ByteArray, utteranceId: String, onReady: (() -> Unit)?) {
+        try {
+            val tempFile = java.io.File.createTempFile("sary_tts", ".mp3", cacheDir)
+            tempFile.writeBytes(audioData)
+            
+            handler.post {
+                cloudMediaPlayer?.release()
+                val player = android.media.MediaPlayer()
+                cloudMediaPlayer = player
+                player.setDataSource(tempFile.absolutePath)
+                player.setOnPreparedListener {
+                    onReady?.invoke()
+                    // Simular callbacks nativos (onStart)
+                    voiceWave.visibility = View.VISIBLE
+                    voiceWave.setActive(true)
+                    isSarySpeaking = true
+                    soundManager.startDucking()
+                    startTtsAnimation()
+                    it.start()
+                }
+                player.setOnCompletionListener {
+                    // Simular callbacks nativos (onDone)
+                    isSarySpeaking = false
+                    voiceWave.setActive(false)
+                    voiceWave.visibility = View.GONE
+                    soundManager.stopDucking()
+                    
+                    when (utteranceId) {
+                        "SARY_RESPONSE" -> {
+                            handler.postDelayed({
+                                statusText.setText("¿Algo más en que te pueda ayudar?")
+                                startListening()
+                            }, 1000)
+                        }
+                        "PROTOCOL_REPORT" -> {
+                            isRunningProtocol = false 
+                        }
+                        "NOTIFICATION_READ" -> {
+                            handler.postDelayed({
+                                stopSelf()
+                            }, 2500)
+                        }
+                        "SARY_WHATSAPP_ASK" -> {
+                            handler.postDelayed({
+                                startListening()
+                            }, 500)
+                        }
+                        "FAREWELL_AND_EXIT" -> {
+                            handler.postDelayed({ stopSelf() }, 500)
+                        }
+                    }
+                    tempFile.delete() // Limpiar caché
+                }
+                player.prepareAsync()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            speakNative("Hubo un error con mi sistema vocal en la nube.", utteranceId)
         }
     }
 

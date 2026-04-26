@@ -32,6 +32,24 @@ class SaryPreferences private constructor(context: Context) {
         private const val KEY_GROQ_MODEL = "groq_model"
         private const val DEFAULT_MODEL = "llama-3.3-70b-versatile"
         
+        // Claves para el motor de TTS
+        private const val KEY_TTS_ENGINE = "tts_engine"
+        const val ENGINE_NATIVE = "NATIVO"
+        const val ENGINE_ELEVENLABS = "ELEVENLABS"
+        const val ENGINE_RESEMBLE = "RESEMBLE_AI"
+        
+        private const val KEY_ELEVENLABS_API = "elevenlabs_api_key"
+        private const val KEY_ELEVENLABS_VOICE = "elevenlabs_voice_id"
+        
+        private const val KEY_RESEMBLE_API = "resemble_api_key"
+        private const val KEY_RESEMBLE_VOICE = "resemble_voice_name"
+        private const val KEY_RESEMBLE_PROJECT = "resemble_project_uuid"
+        
+        private const val KEY_WHATSAPP_IP = "whatsapp_gateway_ip"
+        private const val KEY_WHATSAPP_TOKEN = "whatsapp_gateway_token"
+        private const val KEY_WHATSAPP_AUTOPILOT = "whatsapp_autopilot"
+        private const val KEY_WHATSAPP_CONTEXT = "whatsapp_autopilot_context"
+        
         @Volatile
         private var INSTANCE: SaryPreferences? = null
 
@@ -55,6 +73,48 @@ class SaryPreferences private constructor(context: Context) {
         set(value) = sharedPreferences.edit().putFloat("ambient_volume", value).apply()
 
     fun hasApiKey(): Boolean = !groqApiKey.isNullOrBlank()
+
+    // Configuración TTS Multi-Motor
+    var ttsEngine: String
+        get() = sharedPreferences.getString(KEY_TTS_ENGINE, ENGINE_NATIVE) ?: ENGINE_NATIVE
+        set(value) = sharedPreferences.edit().putString(KEY_TTS_ENGINE, value).apply()
+        
+    var elevenLabsApiKey: String?
+        get() = sharedPreferences.getString(KEY_ELEVENLABS_API, null)
+        set(value) = sharedPreferences.edit().putString(KEY_ELEVENLABS_API, value).apply()
+        
+    var elevenLabsVoiceId: String?
+        get() = sharedPreferences.getString(KEY_ELEVENLABS_VOICE, null)
+        set(value) = sharedPreferences.edit().putString(KEY_ELEVENLABS_VOICE, value).apply()
+        
+    var resembleApiKey: String?
+        get() = sharedPreferences.getString(KEY_RESEMBLE_API, null)
+        set(value) = sharedPreferences.edit().putString(KEY_RESEMBLE_API, value).apply()
+        
+    var resembleVoiceUuid: String?
+        get() = sharedPreferences.getString(KEY_RESEMBLE_VOICE, null)
+        set(value) = sharedPreferences.edit().putString(KEY_RESEMBLE_VOICE, value).apply()
+        
+    var resembleProjectUuid: String?
+        get() = sharedPreferences.getString(KEY_RESEMBLE_PROJECT, null)
+        set(value) = sharedPreferences.edit().putString(KEY_RESEMBLE_PROJECT, value).apply()
+
+    // WhatsApp Configuration
+    var whatsappGatewayIp: String?
+        get() = sharedPreferences.getString(KEY_WHATSAPP_IP, null)
+        set(value) = sharedPreferences.edit().putString(KEY_WHATSAPP_IP, value).apply()
+
+    var whatsappGatewayToken: String?
+        get() = sharedPreferences.getString(KEY_WHATSAPP_TOKEN, null)
+        set(value) = sharedPreferences.edit().putString(KEY_WHATSAPP_TOKEN, value).apply()
+
+    var isAutoPilotWhatsapp: Boolean
+        get() = sharedPreferences.getBoolean(KEY_WHATSAPP_AUTOPILOT, false)
+        set(value) = sharedPreferences.edit().putBoolean(KEY_WHATSAPP_AUTOPILOT, value).apply()
+
+    var whatsappAutoPilotContext: String
+        get() = sharedPreferences.getString(KEY_WHATSAPP_CONTEXT, "Estoy conduciendo.") ?: "Estoy conduciendo."
+        set(value) = sharedPreferences.edit().putString(KEY_WHATSAPP_CONTEXT, value).apply()
 
     // Gestión de Protocolos Programados
     fun getProtocols(): List<AutoProtocol> {

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:2:1-107:12
-INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:2:1-107:12
-INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:2:1-107:12
-INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:2:1-107:12
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:2:1-109:12
+INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:2:1-109:12
+INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:2:1-109:12
+INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:2:1-109:12
 MERGED from [androidx.databinding:viewbinding:8.2.0] /home/eddam/.gradle/caches/transforms-3/40fac7f8f218834f23587f9528b70118/transformed/jetified-viewbinding-8.2.0/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.11.0] /home/eddam/.gradle/caches/transforms-3/79273ccf3ed2379c73f93d1b4e436f68/transformed/material-1.11.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/eddam/.gradle/caches/transforms-3/6b0cb260c03ae61c4621df13426a15d9/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
@@ -120,8 +120,8 @@ ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest
 	android:name
 		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:17:22-71
 application
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:19:5-106:19
-INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:19:5-106:19
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:19:5-108:19
+INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:19:5-108:19
 MERGED from [com.google.android.material:material:1.11.0] /home/eddam/.gradle/caches/transforms-3/79273ccf3ed2379c73f93d1b4e436f68/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] /home/eddam/.gradle/caches/transforms-3/79273ccf3ed2379c73f93d1b4e436f68/transformed/material-1.11.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /home/eddam/.gradle/caches/transforms-3/6b0cb260c03ae61c4621df13426a15d9/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
@@ -163,159 +163,167 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /home/eddam/.gradle/caches/
 	android:allowBackup
 		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:20:9-35
 	android:theme
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:25:9-45
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:26:9-45
+	android:usesCleartextTraffic
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:25:9-44
 activity#com.eddam.heysary.MainActivity
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:26:9-33:20
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:27:9-34:20
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:28:13-36
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:29:13-36
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:27:13-41
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:28:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:29:13-32:29
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:30:13-33:29
 action#android.intent.action.MAIN
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:30:17-69
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:31:17-69
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:30:25-66
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:31:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:31:17-77
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:32:17-77
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:31:27-74
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:32:27-74
 activity#com.eddam.heysary.DashboardActivity
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:35:9-80
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:9-80
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:35:53-77
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:53-77
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:35:19-52
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:19-52
 activity#com.eddam.heysary.SettingsActivity
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:9-79
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:9-79
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:52-76
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:52-76
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:19-51
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:19-51
 activity#com.eddam.heysary.ProtocolsActivity
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:9-80
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:38:9-80
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:53-77
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:38:53-77
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:19-52
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:38:19-52
+activity#com.eddam.heysary.WhatsAppStatusActivity
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:9-85
+	android:exported
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:58-82
+	android:name
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:19-57
 receiver#com.eddam.heysary.ProtocolReceiver
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:9-45:20
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:41:9-47:20
 	android:enabled
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:40:13-35
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:42:13-35
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:41:13-36
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:43:13-36
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:19-51
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:41:19-51
 intent-filter#action:name:com.eddam.heysary.START_PROTOCOL
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:42:13-44:29
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:44:13-46:29
 action#com.eddam.heysary.START_PROTOCOL
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:43:17-75
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:45:17-75
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:43:25-72
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:45:25-72
 service#com.eddam.heysary.AssistantOverlayService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:47:9-54:19
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:49:9-56:19
 	android:enabled
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:49:13-35
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:51:13-35
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:50:13-37
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:52:13-37
 	android:foregroundServiceType
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:51:13-55
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:53:13-55
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:48:13-52
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:50:13-52
 property
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:52:13-53:116
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:54:13-55:116
 	android:value
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:53:17-113
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:55:17-113
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:52:23-82
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:54:23-82
 service#com.eddam.heysary.HeySaryAssistantService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:56:9-67:19
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:58:9-69:19
 	android:label
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:58:13-36
-	android:exported
 		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:60:13-36
+	android:exported
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:62:13-36
 	android:permission
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:59:13-75
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:61:13-75
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:57:13-52
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:59:13-52
 meta-data#android.voice_interaction
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:61:13-63:60
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:63:13-65:60
 	android:resource
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:63:17-57
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:65:17-57
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:62:17-57
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:64:17-57
 intent-filter#action:name:android.service.voice.VoiceInteractionService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:64:13-66:29
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:66:13-68:29
 action#android.service.voice.VoiceInteractionService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:65:17-88
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:67:17-88
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:65:25-85
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:67:25-85
 service#com.eddam.heysary.HeySaryAssistantSessionService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:69:9-72:39
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:71:9-74:39
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:72:13-36
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:74:13-36
 	android:permission
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:71:13-75
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:73:13-75
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:70:13-59
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:72:13-59
 service#com.eddam.heysary.HeySaryRecognitionService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:74:9-82:19
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:76:9-84:19
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:76:13-36
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:78:13-36
 	android:permission
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:77:13-75
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:79:13-75
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:75:13-54
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:77:13-54
 intent-filter#action:name:android.speech.RecognitionService+category:name:android.intent.category.DEFAULT
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:78:13-81:29
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:80:13-83:29
 action#android.speech.RecognitionService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:79:17-76
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:81:17-76
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:79:25-73
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:81:25-73
 category#android.intent.category.DEFAULT
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:80:17-76
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:82:17-76
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:80:27-73
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:82:27-73
 service#com.eddam.heysary.SaryNotificationListener
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:84:9-92:19
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:86:9-94:19
 	android:label
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:86:13-45
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:88:13-45
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:88:13-36
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:90:13-36
 	android:permission
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:87:13-87
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:89:13-87
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:85:13-53
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:87:13-53
 intent-filter#action:name:android.service.notification.NotificationListenerService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:89:13-91:29
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:91:13-93:29
 action#android.service.notification.NotificationListenerService
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:90:17-99
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:92:17-99
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:90:25-96
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:92:25-96
 activity#com.eddam.heysary.WhitelistActivity
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:94:9-80
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:96:9-80
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:94:53-77
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:96:53-77
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:94:19-52
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:96:19-52
 receiver#com.eddam.heysary.HeySaryWidgetProvider
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:96:9-105:20
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:98:9-107:20
 	android:exported
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:98:13-36
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:100:13-36
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:97:13-50
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:99:13-50
 intent-filter#action:name:android.appwidget.action.APPWIDGET_UPDATE
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:99:13-101:29
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:101:13-103:29
 action#android.appwidget.action.APPWIDGET_UPDATE
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:100:17-84
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:102:17-84
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:100:25-81
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:102:25-81
 meta-data#android.appwidget.provider
-ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:102:13-104:55
+ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:104:13-106:55
 	android:resource
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:104:17-52
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:106:17-52
 	android:name
-		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:103:17-58
+		ADDED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:105:17-58
 uses-sdk
 INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml

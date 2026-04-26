@@ -3243,6 +3243,7 @@ id autoComplete
 id autoCompleteToEnd
 id autoCompleteToStart
 id automatic
+id autopilot_container
 id avatar_stack
 id background_gradient
 id barrier
@@ -3258,6 +3259,9 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btn_logout
+id btn_refresh
+id btn_whatsapp_status
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3266,6 +3270,8 @@ id cancel_button
 id card_api
 id card_audio
 id card_notifications
+id card_tts
+id card_whatsapp
 id carryVelocity
 id center
 id centerCrop
@@ -3354,6 +3360,7 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
+id et_autopilot_context
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -3423,6 +3430,7 @@ id linear
 id listMode
 id list_item
 id loading_bar
+id loading_spinner
 id location_text
 id lottie_layer_name
 id m3_side_sheet
@@ -3552,6 +3560,7 @@ id pressed
 id progress_circular
 id progress_horizontal
 id protocols_container
+id qr_image_view
 id radio
 id ratio
 id read_notif_switch
@@ -3628,6 +3637,7 @@ id startToEnd
 id startVertical
 id staticLayout
 id staticPostLayout
+id status_card
 id status_text
 id stop
 id stretch
@@ -3635,6 +3645,7 @@ id submenuarrow
 id submit_area
 id subtitle_text
 id supportScrollUp
+id switch_autopilot
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -3684,6 +3695,11 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tts_api_edit_text
+id tts_cloud_container
+id tts_engine_spinner
+id tts_load_voices_btn
+id tts_voice_spinner
 id unchecked
 id uniform
 id unlabeled
@@ -3702,6 +3718,9 @@ id voice_wave
 id volume_seekbar
 id weather_container
 id west
+id whatsapp_ip_edit
+id whatsapp_title
+id whatsapp_token_edit
 id wide
 id widget_mic_button
 id widget_root
@@ -3832,9 +3851,11 @@ layout activity_dashboard
 layout activity_main
 layout activity_protocols
 layout activity_settings
+layout activity_whatsapp_status
 layout activity_whitelist
 layout contact_card_layout
 layout custom_dialog
+layout custom_spinner_item
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
 layout design_layout_snackbar

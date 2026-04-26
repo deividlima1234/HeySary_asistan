@@ -60,7 +60,7 @@
 29-->[androidx.core:core:1.12.0] /home/eddam/.gradle/caches/transforms-3/073b30953a677e2a926c0f17065fa4c3/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
 30
 31    <application
-31-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:19:5-106:19
+31-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:19:5-108:19
 32        android:allowBackup="true"
 32-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:20:9-35
 33        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -75,255 +75,263 @@
 38-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:23:9-50
 39        android:supportsRtl="true"
 39-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:24:9-35
-40        android:theme="@style/Theme.HeySary" >
-40-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:25:9-45
-41        <activity
-41-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:26:9-33:20
-42            android:name="com.eddam.heysary.MainActivity"
-42-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:27:13-41
-43            android:exported="true" >
-43-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:28:13-36
-44            <intent-filter>
-44-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:29:13-32:29
-45                <action android:name="android.intent.action.MAIN" />
-45-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:30:17-69
-45-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:30:25-66
-46
-47                <category android:name="android.intent.category.LAUNCHER" />
-47-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:31:17-77
-47-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:31:27-74
-48            </intent-filter>
-49        </activity>
-50        <activity
-50-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:35:9-80
-51            android:name="com.eddam.heysary.DashboardActivity"
-51-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:35:19-52
-52            android:exported="false" />
-52-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:35:53-77
-53        <activity
-53-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:9-79
-54            android:name="com.eddam.heysary.SettingsActivity"
-54-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:19-51
-55            android:exported="false" />
-55-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:52-76
-56        <activity
-56-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:9-80
-57            android:name="com.eddam.heysary.ProtocolsActivity"
-57-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:19-52
-58            android:exported="false" />
-58-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:53-77
-59
-60        <receiver
-60-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:9-45:20
-61            android:name="com.eddam.heysary.ProtocolReceiver"
-61-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:19-51
-62            android:enabled="true"
-62-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:40:13-35
-63            android:exported="true" >
-63-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:41:13-36
-64            <intent-filter>
-64-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:42:13-44:29
-65                <action android:name="com.eddam.heysary.START_PROTOCOL" />
-65-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:43:17-75
-65-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:43:25-72
-66            </intent-filter>
-67        </receiver>
-68
-69        <service
-69-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:47:9-54:19
-70            android:name="com.eddam.heysary.AssistantOverlayService"
-70-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:48:13-52
-71            android:enabled="true"
-71-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:49:13-35
-72            android:exported="false"
-72-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:50:13-37
-73            android:foregroundServiceType="specialUse" >
-73-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:51:13-55
-74            <property
-74-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:52:13-53:116
-75                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-75-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:52:23-82
-76                android:value="Asistente de IA proactivo para rutinas diarias y automatización de dispositivos." />
-76-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:53:17-113
-77        </service>
-78        <service
-78-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:56:9-67:19
-79            android:name="com.eddam.heysary.HeySaryAssistantService"
-79-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:57:13-52
-80            android:exported="true"
-80-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:60:13-36
-81            android:label="HeySary"
-81-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:58:13-36
-82            android:permission="android.permission.BIND_VOICE_INTERACTION" >
-82-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:59:13-75
-83            <meta-data
-83-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:61:13-63:60
-84                android:name="android.voice_interaction"
-84-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:62:17-57
-85                android:resource="@xml/assistant_config" />
-85-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:63:17-57
-86
-87            <intent-filter>
-87-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:64:13-66:29
-88                <action android:name="android.service.voice.VoiceInteractionService" />
-88-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:65:17-88
-88-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:65:25-85
-89            </intent-filter>
-90        </service>
-91        <service
-91-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:69:9-72:39
-92            android:name="com.eddam.heysary.HeySaryAssistantSessionService"
-92-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:70:13-59
-93            android:exported="true"
-93-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:72:13-36
-94            android:permission="android.permission.BIND_VOICE_INTERACTION" />
-94-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:71:13-75
+40        android:theme="@style/Theme.HeySary"
+40-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:26:9-45
+41        android:usesCleartextTraffic="true" >
+41-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:25:9-44
+42        <activity
+42-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:27:9-34:20
+43            android:name="com.eddam.heysary.MainActivity"
+43-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:28:13-41
+44            android:exported="true" >
+44-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:29:13-36
+45            <intent-filter>
+45-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:30:13-33:29
+46                <action android:name="android.intent.action.MAIN" />
+46-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:31:17-69
+46-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:31:25-66
+47
+48                <category android:name="android.intent.category.LAUNCHER" />
+48-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:32:17-77
+48-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:32:27-74
+49            </intent-filter>
+50        </activity>
+51        <activity
+51-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:9-80
+52            android:name="com.eddam.heysary.DashboardActivity"
+52-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:19-52
+53            android:exported="false" />
+53-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:36:53-77
+54        <activity
+54-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:9-79
+55            android:name="com.eddam.heysary.SettingsActivity"
+55-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:19-51
+56            android:exported="false" />
+56-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:37:52-76
+57        <activity
+57-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:38:9-80
+58            android:name="com.eddam.heysary.ProtocolsActivity"
+58-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:38:19-52
+59            android:exported="false" />
+59-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:38:53-77
+60        <activity
+60-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:9-85
+61            android:name="com.eddam.heysary.WhatsAppStatusActivity"
+61-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:19-57
+62            android:exported="false" />
+62-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:39:58-82
+63
+64        <receiver
+64-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:41:9-47:20
+65            android:name="com.eddam.heysary.ProtocolReceiver"
+65-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:41:19-51
+66            android:enabled="true"
+66-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:42:13-35
+67            android:exported="true" >
+67-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:43:13-36
+68            <intent-filter>
+68-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:44:13-46:29
+69                <action android:name="com.eddam.heysary.START_PROTOCOL" />
+69-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:45:17-75
+69-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:45:25-72
+70            </intent-filter>
+71        </receiver>
+72
+73        <service
+73-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:49:9-56:19
+74            android:name="com.eddam.heysary.AssistantOverlayService"
+74-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:50:13-52
+75            android:enabled="true"
+75-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:51:13-35
+76            android:exported="false"
+76-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:52:13-37
+77            android:foregroundServiceType="specialUse" >
+77-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:53:13-55
+78            <property
+78-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:54:13-55:116
+79                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+79-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:54:23-82
+80                android:value="Asistente de IA proactivo para rutinas diarias y automatización de dispositivos." />
+80-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:55:17-113
+81        </service>
+82        <service
+82-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:58:9-69:19
+83            android:name="com.eddam.heysary.HeySaryAssistantService"
+83-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:59:13-52
+84            android:exported="true"
+84-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:62:13-36
+85            android:label="HeySary"
+85-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:60:13-36
+86            android:permission="android.permission.BIND_VOICE_INTERACTION" >
+86-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:61:13-75
+87            <meta-data
+87-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:63:13-65:60
+88                android:name="android.voice_interaction"
+88-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:64:17-57
+89                android:resource="@xml/assistant_config" />
+89-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:65:17-57
+90
+91            <intent-filter>
+91-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:66:13-68:29
+92                <action android:name="android.service.voice.VoiceInteractionService" />
+92-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:67:17-88
+92-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:67:25-85
+93            </intent-filter>
+94        </service>
 95        <service
-95-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:74:9-82:19
-96            android:name="com.eddam.heysary.HeySaryRecognitionService"
-96-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:75:13-54
+95-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:71:9-74:39
+96            android:name="com.eddam.heysary.HeySaryAssistantSessionService"
+96-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:72:13-59
 97            android:exported="true"
-97-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:76:13-36
-98            android:permission="android.permission.BIND_VOICE_INTERACTION" >
-98-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:77:13-75
-99            <intent-filter>
-99-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:78:13-81:29
-100                <action android:name="android.speech.RecognitionService" />
-100-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:79:17-76
-100-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:79:25-73
-101
-102                <category android:name="android.intent.category.DEFAULT" />
-102-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:80:17-76
-102-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:80:27-73
-103            </intent-filter>
-104        </service>
-105        <service
-105-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:84:9-92:19
-106            android:name="com.eddam.heysary.SaryNotificationListener"
-106-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:85:13-53
-107            android:exported="true"
-107-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:88:13-36
-108            android:label="HeySary Listener"
-108-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:86:13-45
-109            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
-109-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:87:13-87
-110            <intent-filter>
-110-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:89:13-91:29
-111                <action android:name="android.service.notification.NotificationListenerService" />
-111-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:90:17-99
-111-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:90:25-96
-112            </intent-filter>
-113        </service>
-114
-115        <activity
-115-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:94:9-80
-116            android:name="com.eddam.heysary.WhitelistActivity"
-116-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:94:19-52
-117            android:exported="false" />
-117-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:94:53-77
+97-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:74:13-36
+98            android:permission="android.permission.BIND_VOICE_INTERACTION" />
+98-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:73:13-75
+99        <service
+99-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:76:9-84:19
+100            android:name="com.eddam.heysary.HeySaryRecognitionService"
+100-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:77:13-54
+101            android:exported="true"
+101-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:78:13-36
+102            android:permission="android.permission.BIND_VOICE_INTERACTION" >
+102-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:79:13-75
+103            <intent-filter>
+103-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:80:13-83:29
+104                <action android:name="android.speech.RecognitionService" />
+104-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:81:17-76
+104-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:81:25-73
+105
+106                <category android:name="android.intent.category.DEFAULT" />
+106-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:82:17-76
+106-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:82:27-73
+107            </intent-filter>
+108        </service>
+109        <service
+109-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:86:9-94:19
+110            android:name="com.eddam.heysary.SaryNotificationListener"
+110-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:87:13-53
+111            android:exported="true"
+111-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:90:13-36
+112            android:label="HeySary Listener"
+112-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:88:13-45
+113            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+113-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:89:13-87
+114            <intent-filter>
+114-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:91:13-93:29
+115                <action android:name="android.service.notification.NotificationListenerService" />
+115-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:92:17-99
+115-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:92:25-96
+116            </intent-filter>
+117        </service>
 118
-119        <receiver
-119-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:96:9-105:20
-120            android:name="com.eddam.heysary.HeySaryWidgetProvider"
-120-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:97:13-50
-121            android:exported="true" >
-121-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:98:13-36
-122            <intent-filter>
-122-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:99:13-101:29
-123                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-123-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:100:17-84
-123-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:100:25-81
-124            </intent-filter>
-125
-126            <meta-data
-126-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:102:13-104:55
-127                android:name="android.appwidget.provider"
-127-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:103:17-58
-128                android:resource="@xml/widget_info" />
-128-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:104:17-52
-129        </receiver>
-130
-131        <provider
-131-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
-132            android:name="androidx.startup.InitializationProvider"
-132-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
-133            android:authorities="com.eddam.heysary.androidx-startup"
-133-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
-134            android:exported="false" >
-134-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
-135            <meta-data
-135-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
-136                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-136-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
-137                android:value="androidx.startup" />
-137-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
-138            <meta-data
-138-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/eddam/.gradle/caches/transforms-3/f27b7760ce9f8c6a5f8bb672bdc512e4/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
-139                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-139-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/eddam/.gradle/caches/transforms-3/f27b7760ce9f8c6a5f8bb672bdc512e4/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
-140                android:value="androidx.startup" />
-140-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/eddam/.gradle/caches/transforms-3/f27b7760ce9f8c6a5f8bb672bdc512e4/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
-141            <meta-data
-141-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
-142                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-142-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
-143                android:value="androidx.startup" />
-143-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
-144        </provider>
-145
-146        <activity
-146-->[com.google.android.gms:play-services-base:18.1.0] /home/eddam/.gradle/caches/transforms-3/71b32470f298db9e478b92984892aa33/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
-147            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-147-->[com.google.android.gms:play-services-base:18.1.0] /home/eddam/.gradle/caches/transforms-3/71b32470f298db9e478b92984892aa33/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:19-85
-148            android:exported="false"
-148-->[com.google.android.gms:play-services-base:18.1.0] /home/eddam/.gradle/caches/transforms-3/71b32470f298db9e478b92984892aa33/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:22:19-43
-149            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-149-->[com.google.android.gms:play-services-base:18.1.0] /home/eddam/.gradle/caches/transforms-3/71b32470f298db9e478b92984892aa33/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:21:19-78
-150
-151        <meta-data
-151-->[com.google.android.gms:play-services-basement:18.1.0] /home/eddam/.gradle/caches/transforms-3/237c87e2425aceec80b26bdfef15faf2/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
-152            android:name="com.google.android.gms.version"
-152-->[com.google.android.gms:play-services-basement:18.1.0] /home/eddam/.gradle/caches/transforms-3/237c87e2425aceec80b26bdfef15faf2/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
-153            android:value="@integer/google_play_services_version" />
-153-->[com.google.android.gms:play-services-basement:18.1.0] /home/eddam/.gradle/caches/transforms-3/237c87e2425aceec80b26bdfef15faf2/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+119        <activity
+119-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:96:9-80
+120            android:name="com.eddam.heysary.WhitelistActivity"
+120-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:96:19-52
+121            android:exported="false" />
+121-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:96:53-77
+122
+123        <receiver
+123-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:98:9-107:20
+124            android:name="com.eddam.heysary.HeySaryWidgetProvider"
+124-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:99:13-50
+125            android:exported="true" >
+125-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:100:13-36
+126            <intent-filter>
+126-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:101:13-103:29
+127                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+127-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:102:17-84
+127-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:102:25-81
+128            </intent-filter>
+129
+130            <meta-data
+130-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:104:13-106:55
+131                android:name="android.appwidget.provider"
+131-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:105:17-58
+132                android:resource="@xml/widget_info" />
+132-->/home/eddam/Documentos/Proyectos/HeySary/app/src/main/AndroidManifest.xml:106:17-52
+133        </receiver>
+134
+135        <provider
+135-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+136            android:name="androidx.startup.InitializationProvider"
+136-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:25:13-67
+137            android:authorities="com.eddam.heysary.androidx-startup"
+137-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:26:13-68
+138            android:exported="false" >
+138-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:27:13-37
+139            <meta-data
+139-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+140                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+140-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:30:17-75
+141                android:value="androidx.startup" />
+141-->[androidx.emoji2:emoji2:1.2.0] /home/eddam/.gradle/caches/transforms-3/f94272bad156f86ff26e124ccf6ddba0/transformed/jetified-emoji2-1.2.0/AndroidManifest.xml:31:17-49
+142            <meta-data
+142-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/eddam/.gradle/caches/transforms-3/f27b7760ce9f8c6a5f8bb672bdc512e4/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
+143                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+143-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/eddam/.gradle/caches/transforms-3/f27b7760ce9f8c6a5f8bb672bdc512e4/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
+144                android:value="androidx.startup" />
+144-->[androidx.lifecycle:lifecycle-process:2.6.1] /home/eddam/.gradle/caches/transforms-3/f27b7760ce9f8c6a5f8bb672bdc512e4/transformed/jetified-lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
+145            <meta-data
+145-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+146                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+147                android:value="androidx.startup" />
+147-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+148        </provider>
+149
+150        <activity
+150-->[com.google.android.gms:play-services-base:18.1.0] /home/eddam/.gradle/caches/transforms-3/71b32470f298db9e478b92984892aa33/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
+151            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+151-->[com.google.android.gms:play-services-base:18.1.0] /home/eddam/.gradle/caches/transforms-3/71b32470f298db9e478b92984892aa33/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+152            android:exported="false"
+152-->[com.google.android.gms:play-services-base:18.1.0] /home/eddam/.gradle/caches/transforms-3/71b32470f298db9e478b92984892aa33/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:22:19-43
+153            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+153-->[com.google.android.gms:play-services-base:18.1.0] /home/eddam/.gradle/caches/transforms-3/71b32470f298db9e478b92984892aa33/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:21:19-78
 154
-155        <receiver
-155-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
-156            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-156-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
-157            android:directBootAware="false"
-157-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
-158            android:enabled="true"
-158-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
-159            android:exported="true"
-159-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
-160            android:permission="android.permission.DUMP" >
-160-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
-161            <intent-filter>
-161-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
-162                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-162-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
-162-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
-163            </intent-filter>
-164            <intent-filter>
-164-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
-165                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-165-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
-165-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
-166            </intent-filter>
-167            <intent-filter>
-167-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
-168                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-168-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
-168-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
-169            </intent-filter>
-170            <intent-filter>
-170-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
-171                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-171-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
-171-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
-172            </intent-filter>
-173        </receiver>
-174    </application>
-175
-176</manifest>
+155        <meta-data
+155-->[com.google.android.gms:play-services-basement:18.1.0] /home/eddam/.gradle/caches/transforms-3/237c87e2425aceec80b26bdfef15faf2/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+156            android:name="com.google.android.gms.version"
+156-->[com.google.android.gms:play-services-basement:18.1.0] /home/eddam/.gradle/caches/transforms-3/237c87e2425aceec80b26bdfef15faf2/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+157            android:value="@integer/google_play_services_version" />
+157-->[com.google.android.gms:play-services-basement:18.1.0] /home/eddam/.gradle/caches/transforms-3/237c87e2425aceec80b26bdfef15faf2/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+158
+159        <receiver
+159-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+160            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+160-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+161            android:directBootAware="false"
+161-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+162            android:enabled="true"
+162-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+163            android:exported="true"
+163-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+164            android:permission="android.permission.DUMP" >
+164-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+165            <intent-filter>
+165-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+166                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+166-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+166-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+167            </intent-filter>
+168            <intent-filter>
+168-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+169                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+169-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+169-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+170            </intent-filter>
+171            <intent-filter>
+171-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+172                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+172-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+172-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+173            </intent-filter>
+174            <intent-filter>
+174-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+175                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+175-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+175-->[androidx.profileinstaller:profileinstaller:1.3.0] /home/eddam/.gradle/caches/transforms-3/cd64bbac7c030e887ef4d9ca16abf10a/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+176            </intent-filter>
+177        </receiver>
+178    </application>
+179
+180</manifest>

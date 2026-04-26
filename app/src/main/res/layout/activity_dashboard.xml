@@ -147,6 +147,43 @@
             android:textSize="10sp" />
     </LinearLayout>
 
+    <!-- Piloto Automático WhatsApp -->
+    <LinearLayout
+        android:id="@+id/autopilot_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        android:background="#1AFFFFFF"
+        android:padding="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/manage_protocols_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_autopilot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="WhatsApp Auto-Pilot"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:thumbTint="@color/cyberpunk_red" />
+
+        <EditText
+            android:id="@+id/et_autopilot_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#33000000"
+            android:hint="Ej: En reunión, llámame luego."
+            android:textColor="@color/white"
+            android:textColorHint="#99FFFFFF"
+            android:textSize="14sp"
+            android:padding="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
     <!-- Botón de Activación Directa -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/manage_protocols_btn"

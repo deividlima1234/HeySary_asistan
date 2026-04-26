@@ -4,6 +4,7 @@ package com.eddam.heysary.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.eddam.heysary.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -23,6 +25,9 @@ import java.lang.String;
 public final class ActivityDashboardBinding implements ViewBinding {
   @NonNull
   private final ConstraintLayout rootView;
+
+  @NonNull
+  public final LinearLayout autopilotContainer;
 
   @NonNull
   public final TextView batteryText;
@@ -38,6 +43,9 @@ public final class ActivityDashboardBinding implements ViewBinding {
 
   @NonNull
   public final TextView dateText;
+
+  @NonNull
+  public final EditText etAutopilotContext;
 
   @NonNull
   public final LinearLayout headerContainer;
@@ -58,30 +66,38 @@ public final class ActivityDashboardBinding implements ViewBinding {
   public final ImageView outerGear;
 
   @NonNull
+  public final SwitchMaterial switchAutopilot;
+
+  @NonNull
   public final TextView tempText;
 
   @NonNull
   public final LinearLayout weatherContainer;
 
   private ActivityDashboardBinding(@NonNull ConstraintLayout rootView,
-      @NonNull TextView batteryText, @NonNull BottomNavigationView bottomNav,
-      @NonNull TextView clockText, @NonNull View coreGlow, @NonNull TextView dateText,
+      @NonNull LinearLayout autopilotContainer, @NonNull TextView batteryText,
+      @NonNull BottomNavigationView bottomNav, @NonNull TextView clockText, @NonNull View coreGlow,
+      @NonNull TextView dateText, @NonNull EditText etAutopilotContext,
       @NonNull LinearLayout headerContainer, @NonNull ImageView innerGear,
       @NonNull ShapeableImageView jarvisCore, @NonNull TextView locationText,
       @NonNull MaterialButton manageProtocolsBtn, @NonNull ImageView outerGear,
-      @NonNull TextView tempText, @NonNull LinearLayout weatherContainer) {
+      @NonNull SwitchMaterial switchAutopilot, @NonNull TextView tempText,
+      @NonNull LinearLayout weatherContainer) {
     this.rootView = rootView;
+    this.autopilotContainer = autopilotContainer;
     this.batteryText = batteryText;
     this.bottomNav = bottomNav;
     this.clockText = clockText;
     this.coreGlow = coreGlow;
     this.dateText = dateText;
+    this.etAutopilotContext = etAutopilotContext;
     this.headerContainer = headerContainer;
     this.innerGear = innerGear;
     this.jarvisCore = jarvisCore;
     this.locationText = locationText;
     this.manageProtocolsBtn = manageProtocolsBtn;
     this.outerGear = outerGear;
+    this.switchAutopilot = switchAutopilot;
     this.tempText = tempText;
     this.weatherContainer = weatherContainer;
   }
@@ -113,6 +129,12 @@ public final class ActivityDashboardBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.autopilot_container;
+      LinearLayout autopilotContainer = ViewBindings.findChildViewById(rootView, id);
+      if (autopilotContainer == null) {
+        break missingId;
+      }
+
       id = R.id.battery_text;
       TextView batteryText = ViewBindings.findChildViewById(rootView, id);
       if (batteryText == null) {
@@ -140,6 +162,12 @@ public final class ActivityDashboardBinding implements ViewBinding {
       id = R.id.date_text;
       TextView dateText = ViewBindings.findChildViewById(rootView, id);
       if (dateText == null) {
+        break missingId;
+      }
+
+      id = R.id.et_autopilot_context;
+      EditText etAutopilotContext = ViewBindings.findChildViewById(rootView, id);
+      if (etAutopilotContext == null) {
         break missingId;
       }
 
@@ -179,6 +207,12 @@ public final class ActivityDashboardBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.switch_autopilot;
+      SwitchMaterial switchAutopilot = ViewBindings.findChildViewById(rootView, id);
+      if (switchAutopilot == null) {
+        break missingId;
+      }
+
       id = R.id.temp_text;
       TextView tempText = ViewBindings.findChildViewById(rootView, id);
       if (tempText == null) {
@@ -191,9 +225,10 @@ public final class ActivityDashboardBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityDashboardBinding((ConstraintLayout) rootView, batteryText, bottomNav,
-          clockText, coreGlow, dateText, headerContainer, innerGear, jarvisCore, locationText,
-          manageProtocolsBtn, outerGear, tempText, weatherContainer);
+      return new ActivityDashboardBinding((ConstraintLayout) rootView, autopilotContainer,
+          batteryText, bottomNav, clockText, coreGlow, dateText, etAutopilotContext,
+          headerContainer, innerGear, jarvisCore, locationText, manageProtocolsBtn, outerGear,
+          switchAutopilot, tempText, weatherContainer);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

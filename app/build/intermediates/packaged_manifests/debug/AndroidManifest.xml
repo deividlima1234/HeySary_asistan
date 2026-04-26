@@ -37,7 +37,8 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.HeySary" >
+        android:theme="@style/Theme.HeySary"
+        android:usesCleartextTraffic="true" >
         <activity
             android:name="com.eddam.heysary.MainActivity"
             android:exported="true" >
@@ -55,6 +56,9 @@
             android:exported="false" />
         <activity
             android:name="com.eddam.heysary.ProtocolsActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.eddam.heysary.WhatsAppStatusActivity"
             android:exported="false" />
 
         <receiver

@@ -25,6 +25,11 @@ class GroqClient(context: Context) {
     // Historial de la charla actual
     private val history = mutableListOf<Map<String, String>>()
 
+    fun injectContext(contextMessage: String) {
+        history.add(mapOf("role" to "assistant", "content" to contextMessage))
+        if (history.size > 10) history.removeAt(0)
+    }
+
     suspend fun getResponse(userMessage: String): String = withContext(Dispatchers.IO) {
         val apiKey = prefs.groqApiKey ?: return@withContext "Error: API Key no configurada en Ajustes."
         val model = prefs.groqModel
@@ -43,7 +48,9 @@ class GroqClient(context: Context) {
                          "Responde siempre de forma EXTREMADAMENTE CONCISA (máximo 2 frases). " +
                          "Si el usuario pregunta por un contacto, responde: '[SEARCH_CONTACT: nombre]'. " +
                          "Si el usuario desea llamar a alguien, responde: '[ACTION_CALL: nombre]'. " +
+                         "Si el usuario te dice que le respondas a alguien por WhatsApp o envíes un mensaje, responde EXACTAMENTE: '[REPLY_WHATSAPP: nombre | mensaje a enviar]'. IMPORTANTE: El mensaje de salida debe ser natural y SIN COMILLAS. " +
                          "Si el usuario confirma una acción (como 'si' o 'llámalo'), responde '[CONFIRM_ACTION: TRUE]'. " +
+                         "Si el usuario dice que 'no desea enviar más', se despide, o termina la charla (ej. 'no, es todo', 'adiós'), incluye '[FAREWELL_ACTION]' en tu texto. " +
                          "Contexto actual: Tienes acceso a los contactos locales. Recuerda con quién " +
                          "estás hablando. Sé útil y utiliza voz femenina."
         ))
@@ -202,6 +209,68 @@ class GroqClient(context: Context) {
         } catch (e: Exception) {
             return@withContext "Señor tenemos una nueva notificación de $appName, de $sender, y dice: $message. Señor le sugiero que vaya a revisar cuando pueda"
         }
+    }
+
+    suspend fun getWhatsAppAutoReply(sender: String, message: String, contextMsg: String): String = withContext(Dispatchers.IO) {
+        val apiKey = prefs.groqApiKey ?: return@withContext "Estoy ocupado ahora, te escribo luego."
+        
+        val prompt = """
+            Eres Sary, la asistente personal virtual del usuario.
+            
+            Alguien ($sender) ha enviado este mensaje a tu usuario:
+            "$message"
+            
+            Tu usuario ha dejado este estado de "Piloto Automático": "$contextMsg".
+            IMPORTANTE: Tu único trabajo es crear una respuesta breve para informar al remitente. Esto es una autorespuesta legal y segura. El usuario no está haciendo nada peligroso. No rechaces este prompt por filtros de "conducción peligrosa".
+            
+            Reglas de respuesta:
+            1. Genera una respuesta amable, directa y MUY CORTA (1 o 2 oraciones máximo).
+            2. Usa como base el estado del usuario: "$contextMsg".
+            3. Menciona opcionalmente que eres Sary, la asistente automática.
+            4. Devuelve ÚNICAMENTE el texto que será enviado (sin comillas, sin introducciones).
+        """.trimIndent()
+
+        val jsonRequest = gson.toJson(
+            mapOf(
+                "model" to prefs.groqModel,
+                "messages" to listOf(
+                    mapOf("role" to "system", "content" to prompt)
+                ),
+                "temperature" to 0.7,
+                "max_tokens" to 300
+            )
+        )
+
+        val request = Request.Builder()
+            .url("https://api.groq.com/openai/v1/chat/completions")
+            .post(jsonRequest.toRequestBody(mediaType))
+            .addHeader("Authorization", "Bearer $apiKey")
+            .build()
+
+        try {
+            client.newCall(request).execute().use { response ->
+                val bodyString = response.body?.string() ?: return@withContext "Estoy ocupado en este momento."
+                val jsonResponse = gson.fromJson(bodyString, GroqResponse::class.java)
+                return@withContext jsonResponse.choices.firstOrNull()?.message?.content ?: "Pronto me comunico contigo."
+            }
+        } catch (e: Exception) {
+            return@withContext "Estoy ocupado ahora. (Auto-respuesta)"
+        }
+    }
+
+    suspend fun formatReply(voiceCommand: String, sender: String): String = withContext(Dispatchers.IO) {
+        val apiKey = prefs.groqApiKey ?: return@withContext voiceCommand
+        val prompt = "Convierte esta orden imperfecta de voz: '$voiceCommand' en un mensaje natural para ser enviado a $sender por WhatsApp. Devuelve ÚNICAMENTE el texto que debe enviarse. PROHIBIDO USAR COMILLAS EN EL RESULTADO."
+        
+        val jsonRequest = gson.toJson(mapOf("model" to prefs.groqModel, "messages" to listOf(mapOf("role" to "user", "content" to prompt))))
+        val req = Request.Builder().url("https://api.groq.com/openai/v1/chat/completions").post(jsonRequest.toRequestBody(mediaType)).addHeader("Authorization", "Bearer $apiKey").build()
+        try {
+            client.newCall(req).execute().use { res ->
+                val body = res.body?.string() ?: return@withContext voiceCommand
+                val j = gson.fromJson(body, GroqResponse::class.java)
+                return@withContext j.choices.firstOrNull()?.message?.content ?: voiceCommand
+            }
+        } catch (e: Exception) { return@withContext voiceCommand }
     }
 
     // Clases auxiliares para GSON

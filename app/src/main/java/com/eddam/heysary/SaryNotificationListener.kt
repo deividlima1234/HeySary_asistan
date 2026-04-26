@@ -23,6 +23,11 @@ class SaryNotificationListener : NotificationListenerService() {
         val packageName = sbn.packageName
         if (packageName == this.packageName) return // Ignorar propias notificaciones
 
+        // Ignorar las notificaciones de resumen de grupos (muy comunes en WhatsApp para englobar mensajes)
+        if (sbn.notification.flags and Notification.FLAG_GROUP_SUMMARY != 0) {
+            return
+        }
+
         if (!prefs.isPackageAllowed(packageName)) {
             Log.d("SaryNotif", "Package $packageName not in whitelist, ignoring")
             return

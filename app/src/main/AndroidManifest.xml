@@ -22,6 +22,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.HeySary">
         <activity
             android:name=".MainActivity"
@@ -35,6 +36,7 @@
         <activity android:name=".DashboardActivity" android:exported="false" />
         <activity android:name=".SettingsActivity" android:exported="false" />
         <activity android:name=".ProtocolsActivity" android:exported="false" />
+        <activity android:name=".WhatsAppStatusActivity" android:exported="false" />
 
         <receiver android:name=".ProtocolReceiver"
             android:enabled="true"

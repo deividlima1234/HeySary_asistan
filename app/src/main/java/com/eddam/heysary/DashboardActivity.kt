@@ -12,6 +12,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.eddam.heysary.databinding.ActivityDashboardBinding
 import java.text.SimpleDateFormat
 import java.util.*
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -81,6 +84,26 @@ class DashboardActivity : AppCompatActivity() {
             val intent = Intent(this, ProtocolsActivity::class.java)
             startActivity(intent)
         }
+
+        // WhatsApp AutoPilot UI
+        val prefs = SaryPreferences.getInstance(this)
+        
+        binding.switchAutopilot.isChecked = prefs.isAutoPilotWhatsapp
+        binding.etAutopilotContext.visibility = if (prefs.isAutoPilotWhatsapp) View.VISIBLE else View.GONE
+        binding.etAutopilotContext.setText(prefs.whatsappAutoPilotContext)
+
+        binding.switchAutopilot.setOnCheckedChangeListener { _, isChecked ->
+            prefs.isAutoPilotWhatsapp = isChecked
+            binding.etAutopilotContext.visibility = if (isChecked) View.VISIBLE else View.GONE
+        }
+
+        binding.etAutopilotContext.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                prefs.whatsappAutoPilotContext = s.toString()
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     private fun startClock() {

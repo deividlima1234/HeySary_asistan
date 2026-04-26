@@ -1,38 +1,50 @@
 [
     {
-        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/widget_layout.xml",
-        "source": "com.eddam.heysary.app-main-37:/layout/widget_layout.xml"
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/contact_card_layout.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/contact_card_layout.xml"
     },
     {
-        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_whitelist.xml",
-        "source": "com.eddam.heysary.app-main-37:/layout/activity_whitelist.xml"
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/item_app_whitelist.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/item_app_whitelist.xml"
     },
     {
-        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_protocols.xml",
-        "source": "com.eddam.heysary.app-main-37:/layout/activity_protocols.xml"
-    },
-    {
-        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/item_app_whitelist.xml",
-        "source": "com.eddam.heysary.app-main-37:/layout/item_app_whitelist.xml"
-    },
-    {
-        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_dashboard.xml",
-        "source": "com.eddam.heysary.app-main-37:/layout/activity_dashboard.xml"
-    },
-    {
-        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_main.xml",
-        "source": "com.eddam.heysary.app-main-37:/layout/activity_main.xml"
-    },
-    {
-        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/contact_card_layout.xml",
-        "source": "com.eddam.heysary.app-main-37:/layout/contact_card_layout.xml"
-    },
-    {
-        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/floating_pill_layout.xml",
-        "source": "com.eddam.heysary.app-main-37:/layout/floating_pill_layout.xml"
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/floating_pill_layout.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/floating_pill_layout.xml"
     },
     {
         "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_settings.xml",
         "source": "com.eddam.heysary.app-main-37:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_protocols.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/activity_protocols.xml"
+    },
+    {
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_whitelist.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/activity_whitelist.xml"
+    },
+    {
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_main.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_settings.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_dashboard.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/activity_dashboard.xml"
+    },
+    {
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/custom_spinner_item.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/custom_spinner_item.xml"
+    },
+    {
+        "merged": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-mergeDebugResources-34:/layout/widget_layout.xml",
+        "source": "/home/eddam/.gradle/daemon/8.5/com.eddam.heysary.app-main-37:/layout/widget_layout.xml"
+    },
+    {
+        "merged": "com.eddam.heysary.app-mergeDebugResources-34:/layout/activity_whatsapp_status.xml",
+        "source": "com.eddam.heysary.app-main-37:/layout/activity_whatsapp_status.xml"
     }
 ]

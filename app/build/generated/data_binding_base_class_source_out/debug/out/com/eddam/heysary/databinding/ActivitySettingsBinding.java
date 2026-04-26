@@ -4,6 +4,7 @@ package com.eddam.heysary.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,6 +38,9 @@ public final class ActivitySettingsBinding implements ViewBinding {
   public final BottomNavigationView bottomNav;
 
   @NonNull
+  public final MaterialButton btnWhatsappStatus;
+
+  @NonNull
   public final MaterialCardView cardApi;
 
   @NonNull
@@ -44,6 +48,12 @@ public final class ActivitySettingsBinding implements ViewBinding {
 
   @NonNull
   public final MaterialCardView cardNotifications;
+
+  @NonNull
+  public final MaterialCardView cardTts;
+
+  @NonNull
+  public final MaterialCardView cardWhatsapp;
 
   @NonNull
   public final TextView labelReadNotif;
@@ -64,30 +74,66 @@ public final class ActivitySettingsBinding implements ViewBinding {
   public final TextView settingsTitle;
 
   @NonNull
+  public final TextInputEditText ttsApiEditText;
+
+  @NonNull
+  public final LinearLayout ttsCloudContainer;
+
+  @NonNull
+  public final Spinner ttsEngineSpinner;
+
+  @NonNull
+  public final MaterialButton ttsLoadVoicesBtn;
+
+  @NonNull
+  public final Spinner ttsVoiceSpinner;
+
+  @NonNull
   public final SeekBar volumeSeekbar;
+
+  @NonNull
+  public final TextInputEditText whatsappIpEdit;
+
+  @NonNull
+  public final TextInputEditText whatsappTokenEdit;
 
   private ActivitySettingsBinding(@NonNull ConstraintLayout rootView,
       @NonNull TextInputEditText apiEditText, @NonNull TextInputLayout apiInputLayout,
-      @NonNull BottomNavigationView bottomNav, @NonNull MaterialCardView cardApi,
-      @NonNull MaterialCardView cardAudio, @NonNull MaterialCardView cardNotifications,
-      @NonNull TextView labelReadNotif, @NonNull Spinner modelSpinner,
-      @NonNull MaterialButton notifPermissionBtn, @NonNull SwitchMaterial readNotifSwitch,
-      @NonNull MaterialButton saveConfigBtn, @NonNull TextView settingsTitle,
-      @NonNull SeekBar volumeSeekbar) {
+      @NonNull BottomNavigationView bottomNav, @NonNull MaterialButton btnWhatsappStatus,
+      @NonNull MaterialCardView cardApi, @NonNull MaterialCardView cardAudio,
+      @NonNull MaterialCardView cardNotifications, @NonNull MaterialCardView cardTts,
+      @NonNull MaterialCardView cardWhatsapp, @NonNull TextView labelReadNotif,
+      @NonNull Spinner modelSpinner, @NonNull MaterialButton notifPermissionBtn,
+      @NonNull SwitchMaterial readNotifSwitch, @NonNull MaterialButton saveConfigBtn,
+      @NonNull TextView settingsTitle, @NonNull TextInputEditText ttsApiEditText,
+      @NonNull LinearLayout ttsCloudContainer, @NonNull Spinner ttsEngineSpinner,
+      @NonNull MaterialButton ttsLoadVoicesBtn, @NonNull Spinner ttsVoiceSpinner,
+      @NonNull SeekBar volumeSeekbar, @NonNull TextInputEditText whatsappIpEdit,
+      @NonNull TextInputEditText whatsappTokenEdit) {
     this.rootView = rootView;
     this.apiEditText = apiEditText;
     this.apiInputLayout = apiInputLayout;
     this.bottomNav = bottomNav;
+    this.btnWhatsappStatus = btnWhatsappStatus;
     this.cardApi = cardApi;
     this.cardAudio = cardAudio;
     this.cardNotifications = cardNotifications;
+    this.cardTts = cardTts;
+    this.cardWhatsapp = cardWhatsapp;
     this.labelReadNotif = labelReadNotif;
     this.modelSpinner = modelSpinner;
     this.notifPermissionBtn = notifPermissionBtn;
     this.readNotifSwitch = readNotifSwitch;
     this.saveConfigBtn = saveConfigBtn;
     this.settingsTitle = settingsTitle;
+    this.ttsApiEditText = ttsApiEditText;
+    this.ttsCloudContainer = ttsCloudContainer;
+    this.ttsEngineSpinner = ttsEngineSpinner;
+    this.ttsLoadVoicesBtn = ttsLoadVoicesBtn;
+    this.ttsVoiceSpinner = ttsVoiceSpinner;
     this.volumeSeekbar = volumeSeekbar;
+    this.whatsappIpEdit = whatsappIpEdit;
+    this.whatsappTokenEdit = whatsappTokenEdit;
   }
 
   @Override
@@ -135,6 +181,12 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btn_whatsapp_status;
+      MaterialButton btnWhatsappStatus = ViewBindings.findChildViewById(rootView, id);
+      if (btnWhatsappStatus == null) {
+        break missingId;
+      }
+
       id = R.id.card_api;
       MaterialCardView cardApi = ViewBindings.findChildViewById(rootView, id);
       if (cardApi == null) {
@@ -150,6 +202,18 @@ public final class ActivitySettingsBinding implements ViewBinding {
       id = R.id.card_notifications;
       MaterialCardView cardNotifications = ViewBindings.findChildViewById(rootView, id);
       if (cardNotifications == null) {
+        break missingId;
+      }
+
+      id = R.id.card_tts;
+      MaterialCardView cardTts = ViewBindings.findChildViewById(rootView, id);
+      if (cardTts == null) {
+        break missingId;
+      }
+
+      id = R.id.card_whatsapp;
+      MaterialCardView cardWhatsapp = ViewBindings.findChildViewById(rootView, id);
+      if (cardWhatsapp == null) {
         break missingId;
       }
 
@@ -189,15 +253,59 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.tts_api_edit_text;
+      TextInputEditText ttsApiEditText = ViewBindings.findChildViewById(rootView, id);
+      if (ttsApiEditText == null) {
+        break missingId;
+      }
+
+      id = R.id.tts_cloud_container;
+      LinearLayout ttsCloudContainer = ViewBindings.findChildViewById(rootView, id);
+      if (ttsCloudContainer == null) {
+        break missingId;
+      }
+
+      id = R.id.tts_engine_spinner;
+      Spinner ttsEngineSpinner = ViewBindings.findChildViewById(rootView, id);
+      if (ttsEngineSpinner == null) {
+        break missingId;
+      }
+
+      id = R.id.tts_load_voices_btn;
+      MaterialButton ttsLoadVoicesBtn = ViewBindings.findChildViewById(rootView, id);
+      if (ttsLoadVoicesBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.tts_voice_spinner;
+      Spinner ttsVoiceSpinner = ViewBindings.findChildViewById(rootView, id);
+      if (ttsVoiceSpinner == null) {
+        break missingId;
+      }
+
       id = R.id.volume_seekbar;
       SeekBar volumeSeekbar = ViewBindings.findChildViewById(rootView, id);
       if (volumeSeekbar == null) {
         break missingId;
       }
 
+      id = R.id.whatsapp_ip_edit;
+      TextInputEditText whatsappIpEdit = ViewBindings.findChildViewById(rootView, id);
+      if (whatsappIpEdit == null) {
+        break missingId;
+      }
+
+      id = R.id.whatsapp_token_edit;
+      TextInputEditText whatsappTokenEdit = ViewBindings.findChildViewById(rootView, id);
+      if (whatsappTokenEdit == null) {
+        break missingId;
+      }
+
       return new ActivitySettingsBinding((ConstraintLayout) rootView, apiEditText, apiInputLayout,
-          bottomNav, cardApi, cardAudio, cardNotifications, labelReadNotif, modelSpinner,
-          notifPermissionBtn, readNotifSwitch, saveConfigBtn, settingsTitle, volumeSeekbar);
+          bottomNav, btnWhatsappStatus, cardApi, cardAudio, cardNotifications, cardTts,
+          cardWhatsapp, labelReadNotif, modelSpinner, notifPermissionBtn, readNotifSwitch,
+          saveConfigBtn, settingsTitle, ttsApiEditText, ttsCloudContainer, ttsEngineSpinner,
+          ttsLoadVoicesBtn, ttsVoiceSpinner, volumeSeekbar, whatsappIpEdit, whatsappTokenEdit);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
